@@ -15,7 +15,6 @@ import {
   ArrowUpRight, 
   MapPin, 
   Mail,
-  Search,
   ArrowRight
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -76,11 +75,11 @@ export default function Home() {
           </div>
           
           <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold tracking-tight leading-[1.1] mb-8 text-slate-900 font-headline">
-            Representasi <span className="text-primary relative inline-block">
-              Strategis
+            Dewan Aspirasi <br />
+            <span className="text-primary relative inline-block">
+              Generasi Muda
               <svg className="absolute w-full h-3 -bottom-1 left-0 text-emerald-200 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="none"/></svg>
-            </span><br />
-            Konstituen <span className="text-accent">Muda.</span>
+            </span>
           </h1>
           
           <p className="text-lg md:text-xl text-slate-500 font-medium mb-10 max-w-2xl mx-auto leading-relaxed">
