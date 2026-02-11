@@ -68,12 +68,9 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Right Actions (Desktop) */}
-            <div className="hidden lg:flex items-center gap-3">
-              <Button variant="outline" className="rounded-full font-bold">Autentikasi</Button>
-              <Button className="rounded-full font-bold bg-emerald-900 hover:bg-emerald-800 text-white">
-                Penerimaan Delegasi
-              </Button>
+            {/* Right Actions (Desktop) - Buttons Removed */}
+            <div className="hidden lg:flex items-center">
+              {/* Action buttons removed as per user request */}
             </div>
 
             {/* Mobile Menu Trigger */}
@@ -101,12 +98,7 @@ export default function Home() {
                         {link.name}
                       </a>
                     ))}
-                    <div className="flex flex-col gap-3 mt-6">
-                      <Button variant="outline" className="w-full rounded-xl font-bold py-6">Autentikasi</Button>
-                      <Button className="w-full rounded-xl font-bold bg-emerald-900 hover:bg-emerald-800 text-white py-6">
-                        Penerimaan Delegasi
-                      </Button>
-                    </div>
+                    {/* Mobile buttons removed as per user request */}
                   </div>
                 </SheetContent>
               </Sheet>
