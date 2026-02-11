@@ -102,17 +102,6 @@ export function AspirasiSection() {
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           <div className="space-y-8">
             <div className="flex gap-4 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm">
-              <div className="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center shrink-0">
-                <Sparkles size={24} />
-              </div>
-              <div>
-                <h4 className="font-bold text-slate-900 mb-1">Dukungan GenAI</h4>
-                <p className="text-sm text-slate-500">
-                  Platform kami menggunakan kecerdasan buatan untuk membantu meringkas aspirasi panjang Anda agar lebih mudah dipahami oleh anggota dewan.
-                </p>
-              </div>
-            </div>
-            <div className="flex gap-4 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm">
               <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center shrink-0">
                 <Megaphone size={24} />
               </div>
