@@ -200,27 +200,27 @@ export default function Home() {
               <div className="w-14 h-14 bg-emerald-100 text-primary rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300">
                 <MessageCircle size={32} strokeWidth={2.5} />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3 font-headline">Jaring Asmara</h3>
-              <p className="text-slate-500 text-sm leading-relaxed mb-6">Program "Jaring Aspirasi Masyarakat Sekolah" untuk menampung keluhan dan ide siswa secara digital.</p>
-              <a href="#" className="text-sm font-bold text-primary flex items-center gap-2 hover:gap-3 transition-all">Pelajari <ChevronRight size={16} /></a>
+              <h3 className="text-xl font-bold text-slate-900 mb-3 font-headline">Portal Aspirasi Digital</h3>
+              <p className="text-slate-500 text-sm leading-relaxed mb-6">Sistem manajemen aspirasi terpadu untuk menghimpun dan memproses masukan serta gagasan konstruktif siswa secara sistematis.</p>
+              <a href="#" className="text-sm font-bold text-primary flex items-center gap-2 hover:gap-3 transition-all">Selengkapnya <ChevronRight size={16} /></a>
             </div>
 
             <div className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-lg transition-all group">
               <div className="w-14 h-14 bg-amber-100 text-accent rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300">
                 <Landmark size={32} strokeWidth={2.5} />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3 font-headline">Parlemen Sekolah</h3>
-              <p className="text-slate-500 text-sm leading-relaxed mb-6">Simulasi sidang dan pelatihan legal drafting untuk pengurus MPK/OSIS se-Jawa Barat.</p>
-              <a href="#" className="text-sm font-bold text-accent flex items-center gap-2 hover:gap-3 transition-all">Pelajari <ChevronRight size={16} /></a>
+              <h3 className="text-xl font-bold text-slate-900 mb-3 font-headline">Parlemen Pelajar</h3>
+              <p className="text-slate-500 text-sm leading-relaxed mb-6">Program edukasi kepemimpinan melalui simulasi mekanisme persidangan legislatif dan penyusunan naskah regulasi formal.</p>
+              <a href="#" className="text-sm font-bold text-accent flex items-center gap-2 hover:gap-3 transition-all">Selengkapnya <ChevronRight size={16} /></a>
             </div>
 
             <div className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-lg transition-all group">
               <div className="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300">
                 <Handshake size={32} strokeWidth={2.5} />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3 font-headline">Kunjungan Kerja</h3>
-              <p className="text-slate-500 text-sm leading-relaxed mb-6">Studi banding dan audiensi dengan DPRD serta Dinas Pendidikan terkait kebijakan pelajar.</p>
-              <a href="#" className="text-sm font-bold text-blue-600 flex items-center gap-2 hover:gap-3 transition-all">Pelajari <ChevronRight size={16} /></a>
+              <h3 className="text-xl font-bold text-slate-900 mb-3 font-headline">Audiensi Legislatif</h3>
+              <p className="text-slate-500 text-sm leading-relaxed mb-6">Inisiatif koordinasi strategis dan dialog interaktif bersama lembaga legislatif terkait evaluasi kebijakan pendidikan daerah.</p>
+              <a href="#" className="text-sm font-bold text-blue-600 flex items-center gap-2 hover:gap-3 transition-all">Selengkapnya <ChevronRight size={16} /></a>
             </div>
           </div>
         </div>

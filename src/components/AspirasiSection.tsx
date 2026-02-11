@@ -7,42 +7,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Megaphone, Sparkles, Send, CheckCircle2, Loader2 } from "lucide-react";
-import { summarizeAspiration } from '@/ai/flows/summarize-aspirations';
+import { Megaphone, Send, CheckCircle2, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export function AspirasiSection() {
   const [aspiration, setAspiration] = useState('');
-  const [summary, setSummary] = useState('');
-  const [isSummarizing, setIsSummarizing] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const { toast } = useToast();
-
-  const handleSummarize = async () => {
-    if (!aspiration.trim()) {
-      toast({
-        variant: "destructive",
-        title: "Input Kosong",
-        description: "Silakan masukkan aspirasi Anda terlebih dahulu."
-      });
-      return;
-    }
-
-    setIsSummarizing(true);
-    try {
-      const result = await summarizeAspiration(aspiration);
-      setSummary(result);
-    } catch (error) {
-      toast({
-        variant: "destructive",
-        title: "Gagal Meringkas",
-        description: "Maaf, terjadi kesalahan saat memproses ringkasan."
-      });
-    } finally {
-      setIsSummarizing(false);
-    }
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,7 +25,7 @@ export function AspirasiSection() {
       setSubmitted(true);
       toast({
         title: "Berhasil Terkirim",
-        description: "Aspirasi Anda telah kami terima dan akan segera diproses."
+        description: "Aspirasi Anda telah kami terima dan akan segera diproses secara administratif."
       });
     }, 1500);
   };
@@ -74,7 +46,6 @@ export function AspirasiSection() {
             onClick={() => {
               setSubmitted(false);
               setAspiration('');
-              setSummary('');
             }}
           >
             Kirim Aspirasi Lain
@@ -95,7 +66,7 @@ export function AspirasiSection() {
             Sampaikan Suaramu
           </h2>
           <p className="text-slate-500 mt-3 max-w-2xl mx-auto">
-            Wadah digital untuk menyampaikan keresahan, ide, dan harapan demi masa depan pendidikan yang lebih inklusif.
+            Wadah digital resmi untuk menyampaikan keresahan, ide, dan harapan demi masa depan pendidikan yang lebih inklusif.
           </p>
         </div>
 
@@ -108,7 +79,7 @@ export function AspirasiSection() {
               <div>
                 <h4 className="font-bold text-slate-900 mb-1">Transparansi</h4>
                 <p className="text-sm text-slate-500">
-                  Setiap aspirasi akan diregistrasi dan Anda dapat melacak status tindak lanjutnya melalui portal anggota.
+                  Setiap aspirasi akan diregistrasi secara resmi dan Anda dapat melacak status tindak lanjutnya melalui portal koordinasi.
                 </p>
               </div>
             </div>
@@ -116,59 +87,38 @@ export function AspirasiSection() {
 
           <Card className="shadow-card border-slate-100 overflow-hidden">
             <CardHeader className="bg-slate-50/50">
-              <CardTitle className="font-headline">Formulir Aspirasi</CardTitle>
-              <CardDescription>Lengkapi detail di bawah ini untuk mengirimkan aspirasi Anda.</CardDescription>
+              <CardTitle className="font-headline">Formulir Aspirasi Resmi</CardTitle>
+              <CardDescription>Lengkapi detail di bawah ini untuk mengirimkan aspirasi Anda kepada dewan.</CardDescription>
             </CardHeader>
             <CardContent className="pt-6">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="name">Nama Lengkap</Label>
-                    <Input id="name" placeholder="Fulan bin Fulan" required />
+                    <Input id="name" placeholder="Nama sesuai identitas" required />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="school">Asal Sekolah</Label>
-                    <Input id="school" placeholder="SMAN 1 Bandung" required />
+                    <Input id="school" placeholder="Nama instansi pendidikan" required />
                   </div>
                 </div>
                 
                 <div className="space-y-2">
                   <Label htmlFor="subject">Subjek Isu</Label>
-                  <Input id="subject" placeholder="Contoh: Infrastruktur Perpustakaan" required />
+                  <Input id="subject" placeholder="Misal: Evaluasi Infrastruktur Pendidikan" required />
                 </div>
 
                 <div className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <Label htmlFor="aspiration">Isi Aspirasi</Label>
-                    <button 
-                      type="button"
-                      onClick={handleSummarize}
-                      disabled={isSummarizing || !aspiration}
-                      className="text-xs font-bold text-emerald-600 flex items-center gap-1 hover:text-emerald-700 disabled:opacity-50 transition-colors"
-                    >
-                      {isSummarizing ? <Loader2 className="animate-spin" size={12} /> : <Sparkles size={12} />}
-                      Ringkas dengan AI
-                    </button>
-                  </div>
+                  <Label htmlFor="aspiration">Isi Aspirasi</Label>
                   <Textarea 
                     id="aspiration" 
-                    placeholder="Ceritakan aspirasi atau permasalahan Anda secara mendetail..."
-                    className="min-h-[150px]"
+                    placeholder="Sampaikan aspirasi atau permasalahan Anda secara mendetail dan sistematis..."
+                    className="min-h-[200px]"
                     value={aspiration}
                     onChange={(e) => setAspiration(e.target.value)}
                     required
                   />
                 </div>
-
-                {summary && (
-                  <div className="p-4 bg-emerald-50 rounded-lg border border-emerald-100 animate-fade-up">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Sparkles size={14} className="text-emerald-600" />
-                      <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider">Ringkasan AI:</span>
-                    </div>
-                    <p className="text-sm text-slate-700 italic">"{summary}"</p>
-                  </div>
-                )}
 
                 <Button 
                   type="submit" 
@@ -176,7 +126,7 @@ export function AspirasiSection() {
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? <Loader2 className="animate-spin mr-2" /> : <Send className="mr-2" size={18} />}
-                  Kirim Sekarang
+                  Kirim Aspirasi
                 </Button>
               </form>
             </CardContent>
