@@ -74,7 +74,7 @@ export default function Home() {
             <span className="text-xs font-bold text-slate-600 tracking-wide uppercase">Institusi Representatif Generasi Muda Indonesia</span>
           </div>
           
-          <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold tracking-tight leading-[1.1] mb-8 text-slate-900 font-headline">
+          <h1 className="text-3xl md:text-5xl lg:text-[4rem] font-extrabold tracking-tight leading-[1.1] mb-8 text-slate-900 font-headline">
             Dewan Aspirasi <br />
             <span className="text-primary relative inline-block">
               Generasi Muda
