@@ -17,13 +17,30 @@ import {
   Files,
   TrendingUp,
   BookOpen,
-  Briefcase
+  Briefcase,
+  Menu
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AspirasiSection } from "@/components/AspirasiSection";
 import { Toaster } from "@/components/ui/toaster";
+import { 
+  Sheet, 
+  SheetContent, 
+  SheetHeader, 
+  SheetTitle, 
+  SheetTrigger,
+  SheetDescription 
+} from "@/components/ui/sheet";
 
 export default function Home() {
+  const NavLinks = [
+    { name: "Beranda", href: "#beranda" },
+    { name: "E-Aspirasi", href: "#aspirasi" },
+    { name: "Sidang Nasional", href: "#event" },
+    { name: "Bidang Kerja", href: "#program" },
+    { name: "Warta Dewan", href: "#berita" },
+  ];
+
   return (
     <div className="flex flex-col min-h-screen">
       {/* NAVIGATION */}
@@ -40,22 +57,59 @@ export default function Home() {
 
             {/* Desktop Menu */}
             <div className="hidden lg:flex items-center gap-1 bg-white/60 p-1.5 rounded-full border border-slate-200/60 shadow-sm backdrop-blur-md">
-              <a href="#beranda" className="px-5 py-2 text-sm font-semibold text-slate-600 hover:text-primary transition-colors">Beranda</a>
-              <a href="#aspirasi" className="px-5 py-2 text-sm font-semibold text-slate-600 hover:text-primary transition-colors">E-Aspirasi</a>
-              <a href="#event" className="px-5 py-2 text-xs font-bold text-white bg-primary rounded-full shadow-glow hover:bg-emerald-800 transition-colors flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
-                Legislative Summit
-              </a>
-              <a href="#program" className="px-5 py-2 text-sm font-semibold text-slate-600 hover:text-primary transition-colors">Bidang Kerja</a>
-              <a href="#berita" className="px-5 py-2 text-sm font-semibold text-slate-600 hover:text-primary transition-colors">Warta Dewan</a>
+              {NavLinks.map((link) => (
+                <a 
+                  key={link.name} 
+                  href={link.href} 
+                  className="px-5 py-2 text-sm font-semibold text-slate-600 hover:text-primary transition-colors"
+                >
+                  {link.name}
+                </a>
+              ))}
             </div>
 
-            {/* Right Actions */}
-            <div className="hidden md:flex items-center gap-3">
+            {/* Right Actions (Desktop) */}
+            <div className="hidden lg:flex items-center gap-3">
               <Button variant="outline" className="rounded-full font-bold">Autentikasi</Button>
-              <Button className="rounded-full font-bold bg-emerald-900 hover:bg-emerald-800 text-white flex items-center gap-2">
+              <Button className="rounded-full font-bold bg-emerald-900 hover:bg-emerald-800 text-white">
                 Penerimaan Delegasi
               </Button>
+            </div>
+
+            {/* Mobile Menu Trigger */}
+            <div className="lg:hidden">
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" size="icon" className="rounded-full">
+                    <Menu className="h-6 w-6 text-slate-900" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="right" className="w-[300px] sm:w-[400px] pt-12">
+                  <SheetHeader className="text-left mb-8">
+                    <SheetTitle className="text-2xl font-bold text-primary">DAGM</SheetTitle>
+                    <SheetDescription className="text-xs font-bold uppercase tracking-widest">
+                      Dewan Aspirasi Generasi Muda
+                    </SheetDescription>
+                  </SheetHeader>
+                  <div className="flex flex-col gap-4">
+                    {NavLinks.map((link) => (
+                      <a 
+                        key={link.name} 
+                        href={link.href} 
+                        className="text-lg font-semibold text-slate-700 hover:text-primary py-2 border-b border-slate-50 transition-colors"
+                      >
+                        {link.name}
+                      </a>
+                    ))}
+                    <div className="flex flex-col gap-3 mt-6">
+                      <Button variant="outline" className="w-full rounded-xl font-bold py-6">Autentikasi</Button>
+                      <Button className="w-full rounded-xl font-bold bg-emerald-900 hover:bg-emerald-800 text-white py-6">
+                        Penerimaan Delegasi
+                      </Button>
+                    </div>
+                  </div>
+                </SheetContent>
+              </Sheet>
             </div>
           </div>
         </div>
