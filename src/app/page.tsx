@@ -48,15 +48,15 @@ export default function Home() {
                 <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
                 Legislative Summit
               </a>
-              <a href="#program" className="px-5 py-2 text-sm font-semibold text-slate-600 hover:text-primary transition-colors">Program</a>
-              <a href="#berita" className="px-5 py-2 text-sm font-semibold text-slate-600 hover:text-primary transition-colors">Berita</a>
+              <a href="#program" className="px-5 py-2 text-sm font-semibold text-slate-600 hover:text-primary transition-colors">Program Strategis</a>
+              <a href="#berita" className="px-5 py-2 text-sm font-semibold text-slate-600 hover:text-primary transition-colors">Warta Dewan</a>
             </div>
 
             {/* Right Actions */}
             <div className="hidden md:flex items-center gap-3">
-              <Button variant="outline" className="rounded-full font-bold">Masuk</Button>
+              <Button variant="outline" className="rounded-full font-bold">Autentikasi</Button>
               <Button className="rounded-full font-bold bg-emerald-900 hover:bg-emerald-800 text-white flex items-center gap-2">
-                Gabung Dewan
+                Penerimaan Delegasi
               </Button>
             </div>
           </div>
@@ -72,27 +72,27 @@ export default function Home() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center mt-8 relative z-10 animate-fade-up">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border border-emerald-100 rounded-full shadow-sm mb-8">
             <span className="w-2 h-2 rounded-full bg-accent"></span>
-            <span className="text-xs font-bold text-slate-600 tracking-wide uppercase">Official Platform DAGM Indonesia</span>
+            <span className="text-xs font-bold text-slate-600 tracking-wide uppercase">Institusi Representatif Generasi Muda Indonesia</span>
           </div>
           
           <h1 className="text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold tracking-tight leading-[1.1] mb-8 text-slate-900 font-headline">
-            Suara <span className="text-primary relative inline-block">
-              Aspirasi
+            Representasi <span className="text-primary relative inline-block">
+              Strategis
               <svg className="absolute w-full h-3 -bottom-1 left-0 text-emerald-200 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="8" fill="none"/></svg>
             </span><br />
-            Generasi <span className="text-accent">Muda.</span>
+            Konstituen <span className="text-accent">Muda.</span>
           </h1>
           
           <p className="text-lg md:text-xl text-slate-500 font-medium mb-10 max-w-2xl mx-auto leading-relaxed">
-            Wadah resmi pelajar untuk berdialektika, merumuskan kebijakan, dan berkolaborasi demi kemajuan pendidikan dan lingkungan sekolah.
+            Lembaga formal bagi generasi muda untuk berdialektika secara intelektual, merumuskan rekomendasi kebijakan, dan melakukan advokasi terhadap sistem pendidikan nasional.
           </p>
           
           <div className="flex flex-wrap justify-center gap-4 mb-20">
             <Button className="px-8 py-6 rounded-full font-bold bg-emerald-900 hover:bg-primary transition-all shadow-lg min-w-[180px] text-lg">
-              <Megaphone className="mr-2" size={20} /> Suarakan Isu
+              <Megaphone className="mr-2" size={20} /> Ajukan Aspirasi
             </Button>
             <Button variant="outline" className="px-8 py-6 rounded-full font-bold bg-white text-emerald-900 border-slate-200 transition-all shadow-sm min-w-[180px] text-lg">
-              <FileText className="mr-2" size={20} /> Lihat Program
+              <FileText className="mr-2" size={20} /> Program Kerja
             </Button>
           </div>
         </div>
@@ -134,9 +134,9 @@ export default function Home() {
       <section id="event" className="py-24 bg-white relative">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <span className="bg-emerald-50 text-primary border border-emerald-100 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">Agenda Utama</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mt-6 font-headline">Sidang & Musyawarah</h2>
-            <p className="text-slate-500 mt-3 max-w-2xl mx-auto">Forum tertinggi pengambilan keputusan dan perumusan rekomendasi kebijakan pelajar.</p>
+            <span className="bg-emerald-50 text-primary border border-emerald-100 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">Agenda Paripurna</span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mt-6 font-headline">Sidang & Musyawarah Nasional</h2>
+            <p className="text-slate-500 mt-3 max-w-2xl mx-auto">Forum tertinggi pengambilan keputusan kolektif-kolegial dan perumusan rekomendasi kebijakan strategis.</p>
           </div>
 
           <div className="bg-gradient-to-br from-slate-900 to-emerald-950 rounded-[2.5rem] shadow-2xl overflow-hidden text-white relative">
@@ -153,7 +153,7 @@ export default function Home() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent lg:bg-gradient-to-r"></div>
                 <div className="absolute bottom-8 left-8">
-                  <div className="bg-accent text-white px-4 py-1.5 rounded-lg text-xs font-bold inline-block mb-2 shadow-lg">Segera Hadir</div>
+                  <div className="bg-accent text-white px-4 py-1.5 rounded-lg text-xs font-bold inline-block mb-2 shadow-lg">Tahap Persiapan</div>
                   <h4 className="text-xl font-bold">Gedung Merdeka, Bandung</h4>
                 </div>
               </div>
@@ -161,26 +161,26 @@ export default function Home() {
               <div className="lg:w-1/2 p-8 md:p-12 lg:p-16 relative z-10 flex flex-col justify-center">
                 <h3 className="text-3xl md:text-4xl font-extrabold mb-2 leading-tight font-headline">DAGM Youth<br /><span className="text-emerald-400">Legislative Summit</span> 2026</h3>
                 <p className="text-slate-300 mb-8 text-lg font-light border-l-4 border-accent pl-4 py-1 mt-4">
-                  "Mewujudkan Parlemen Pelajar yang Kritis, Progresif, dan Berintegritas."
+                  "Mewujudkan Parlemen Muda yang Kritis, Progresif, dan Memiliki Integritas Konstitusional."
                 </p>
 
                 <div className="grid grid-cols-2 gap-6 mb-10">
                   <div>
-                    <p className="text-xs text-slate-400 uppercase font-bold tracking-wider mb-1">Tanggal</p>
+                    <p className="text-xs text-slate-400 uppercase font-bold tracking-wider mb-1">Pelaksanaan</p>
                     <p className="text-lg font-semibold">28 Oktober 2026</p>
                   </div>
                   <div>
-                    <p className="text-xs text-slate-400 uppercase font-bold tracking-wider mb-1">Peserta</p>
-                    <p className="text-lg font-semibold">500 Ketua OSIS/MPK</p>
+                    <p className="text-xs text-slate-400 uppercase font-bold tracking-wider mb-1">Delegasi</p>
+                    <p className="text-lg font-semibold">500 Representatif</p>
                   </div>
                 </div>
 
                 <div className="flex flex-wrap gap-4">
                   <Button className="px-8 py-6 bg-white text-emerald-900 rounded-full font-bold hover:bg-emerald-50 transition-colors shadow-lg">
-                    Daftar Delegasi <ArrowRight className="ml-2" size={18} />
+                    Registrasi Delegasi <ArrowRight className="ml-2" size={18} />
                   </Button>
                   <Button variant="outline" className="px-8 py-6 bg-transparent border-white/20 text-white rounded-full font-bold hover:bg-white/10 transition-colors">
-                    Unduh Proposal
+                    Telaah Naskah Konsep
                   </Button>
                 </div>
               </div>
@@ -201,26 +201,26 @@ export default function Home() {
                 <MessageCircle size={32} strokeWidth={2.5} />
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3 font-headline">Portal Aspirasi Digital</h3>
-              <p className="text-slate-500 text-sm leading-relaxed mb-6">Sistem manajemen aspirasi terpadu untuk menghimpun dan memproses masukan serta gagasan konstruktif siswa secara sistematis.</p>
-              <a href="#" className="text-sm font-bold text-primary flex items-center gap-2 hover:gap-3 transition-all">Selengkapnya <ChevronRight size={16} /></a>
+              <p className="text-slate-500 text-sm leading-relaxed mb-6">Sistem manajemen integrasi untuk menghimpun, mengkategorikan, dan memproses masukan strategis konstituen muda secara administratif dan sistematis.</p>
+              <a href="#" className="text-sm font-bold text-primary flex items-center gap-2 hover:gap-3 transition-all">Dokumentasi <ChevronRight size={16} /></a>
             </div>
 
             <div className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-lg transition-all group">
               <div className="w-14 h-14 bg-amber-100 text-accent rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300">
                 <Landmark size={32} strokeWidth={2.5} />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3 font-headline">Parlemen Pelajar</h3>
-              <p className="text-slate-500 text-sm leading-relaxed mb-6">Program edukasi kepemimpinan melalui simulasi mekanisme persidangan legislatif dan penyusunan naskah regulasi formal.</p>
-              <a href="#" className="text-sm font-bold text-accent flex items-center gap-2 hover:gap-3 transition-all">Selengkapnya <ChevronRight size={16} /></a>
+              <h3 className="text-xl font-bold text-slate-900 mb-3 font-headline">Parlemen Muda</h3>
+              <p className="text-slate-500 text-sm leading-relaxed mb-6">Program penguatan kapasitas kepemimpinan melalui simulasi mekanisme persidangan legislatif dan penyusunan naskah regulasi formal tingkat lanjut.</p>
+              <a href="#" className="text-sm font-bold text-accent flex items-center gap-2 hover:gap-3 transition-all">Dokumentasi <ChevronRight size={16} /></a>
             </div>
 
             <div className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-lg transition-all group">
               <div className="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300">
                 <Handshake size={32} strokeWidth={2.5} />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3 font-headline">Audiensi Legislatif</h3>
-              <p className="text-slate-500 text-sm leading-relaxed mb-6">Inisiatif koordinasi strategis dan dialog interaktif bersama lembaga legislatif terkait evaluasi kebijakan pendidikan daerah.</p>
-              <a href="#" className="text-sm font-bold text-blue-600 flex items-center gap-2 hover:gap-3 transition-all">Selengkapnya <ChevronRight size={16} /></a>
+              <h3 className="text-xl font-bold text-slate-900 mb-3 font-headline">Audiensi Strategis</h3>
+              <p className="text-slate-500 text-sm leading-relaxed mb-6">Inisiatif koordinasi dan dialog interaktif bersama pemangku kepentingan otoritas legislatif dalam rangka evaluasi kebijakan sektor pendidikan.</p>
+              <a href="#" className="text-sm font-bold text-blue-600 flex items-center gap-2 hover:gap-3 transition-all">Dokumentasi <ChevronRight size={16} /></a>
             </div>
           </div>
         </div>
@@ -231,19 +231,19 @@ export default function Home() {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
             <div>
-              <span className="text-primary font-bold uppercase tracking-wider text-xs">Kepemimpinan</span>
+              <span className="text-primary font-bold uppercase tracking-wider text-xs">Pimpinan Dewan</span>
               <h2 className="text-3xl font-extrabold text-slate-900 mt-2 font-headline">Badan Pengurus Harian</h2>
             </div>
             <Button variant="outline" className="rounded-full font-bold">
-              Lihat Struktur Lengkap
+              Struktur Fungsional
             </Button>
           </div>
 
           <div className="space-y-4">
             {[
-              { name: "Farhan Aditya", role: "Ketua Dewan", school: "SMAN 3 Bandung", color: "bg-emerald-600", accent: "text-emerald-600" },
-              { name: "Nadina Putri", role: "Wakil Ketua I", school: "SMA Telkom Bandung", color: "bg-amber-600", accent: "text-amber-600" },
-              { name: "Rizky Fauzan", role: "Sekretaris Jenderal", school: "SMAN 1 Bogor", color: "bg-blue-600", accent: "text-blue-600" }
+              { name: "Farhan Aditya", role: "Ketua Dewan", institution: "SMAN 3 Bandung", color: "bg-emerald-600", accent: "text-emerald-600" },
+              { name: "Nadina Putri", role: "Wakil Ketua I", institution: "SMA Telkom Bandung", color: "bg-amber-600", accent: "text-amber-600" },
+              { name: "Rizky Fauzan", role: "Sekretaris Jenderal", institution: "SMAN 1 Bogor", color: "bg-blue-600", accent: "text-blue-600" }
             ].map((person, idx) => (
               <div key={idx} className="group flex items-center justify-between p-4 md:p-6 rounded-2xl bg-white border border-slate-100 hover:border-emerald-200 hover:shadow-md transition-all">
                 <div className="flex items-center gap-4 md:gap-6">
@@ -256,8 +256,8 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="hidden md:block text-right">
-                  <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">Asal Sekolah</p>
-                  <p className="text-sm font-semibold text-slate-700">{person.school}</p>
+                  <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">Afiliasi Institusi</p>
+                  <p className="text-sm font-semibold text-slate-700">{person.institution}</p>
                 </div>
                 <div className="w-10 h-10 rounded-full border border-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-primary group-hover:text-white group-hover:border-transparent transition-all">
                   <ChevronRight size={18} strokeWidth={2.5} />
@@ -273,39 +273,39 @@ export default function Home() {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
             <div>
-              <span className="text-primary font-bold uppercase tracking-wider text-xs">Warta Dewan</span>
-              <h2 className="text-3xl font-extrabold text-slate-900 mt-2 font-headline">Berita & Opini Terkini</h2>
+              <span className="text-primary font-bold uppercase tracking-wider text-xs">Publikasi Resmi</span>
+              <h2 className="text-3xl font-extrabold text-slate-900 mt-2 font-headline">Warta & Opini Strategis</h2>
             </div>
             <Button variant="outline" className="rounded-full font-bold bg-white group">
-              Lihat Semua Berita <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={16} />
+              Arsip Publikasi <ArrowRight className="ml-2" size={16} />
             </Button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { 
-                tag: "Kegiatan", 
-                title: "Hasil Reses Dewan: 5 Isu Prioritas Pelajar Jabar", 
+                tag: "Laporan Anggota", 
+                title: "Hasil Reses Dewan: 5 Isu Prioritas Konstituen Muda Jabar", 
                 date: "12 Agt 2026", 
                 img: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80",
                 hint: "business meeting",
-                desc: "Rangkuman hasil jaring aspirasi dari 27 Kota/Kabupaten yang akan dibawa ke sidang paripurna."
+                desc: "Rangkuman hasil penyerapan aspirasi dari 27 Kota/Kabupaten yang akan diajukan ke sidang paripurna."
               },
               { 
-                tag: "Opini", 
-                title: "Mengapa 'Student Government' Itu Penting di Era Digital?", 
+                tag: "Opini Kebijakan", 
+                title: "Efektivitas 'Student Government' dalam Ekosistem Demokrasi Digital", 
                 date: "10 Agt 2026", 
                 img: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=800&q=80",
                 hint: "writing paper",
-                desc: "Membangun kesadaran politik dan kepemimpinan sejak dini bukan sekadar simulasi investasi."
+                desc: "Analisis terhadap urgensi kesadaran politik dan kepemimpinan pemuda sebagai instrumen kemajuan bangsa."
               },
               { 
-                tag: "Rilis", 
-                title: "Press Release: Pelantikan Pengurus Baru Periode 2026-2027", 
+                tag: "Rilis Pers", 
+                title: "Siaran Pers: Pelantikan Fungsionaris Dewan Periode 2026-2027", 
                 date: "05 Agt 2026", 
                 img: "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80",
                 hint: "press release",
-                desc: "DAGM resmi melantik 120 pengurus baru yang terpilih melalui seleksi ketat dari berbagai sekolah."
+                desc: "DAGM secara resmi telah melantik fungsionaris baru yang terpilih melalui proses seleksi kompetensi yang ketat."
               }
             ].map((article, idx) => (
               <article key={idx} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 group flex flex-col h-full">
@@ -320,7 +320,7 @@ export default function Home() {
                   <div className="flex items-center gap-3 text-xs text-slate-400 mb-3 font-medium">
                     <span className="flex items-center gap-1"><Calendar size={12} /> {article.date}</span>
                     <span className="w-1 h-1 rounded-full bg-slate-300"></span>
-                    <span>Admin DAGM</span>
+                    <span>Sekretariat DAGM</span>
                   </div>
                   <h3 className="text-lg font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors leading-tight font-headline">
                     {article.title}
@@ -329,7 +329,7 @@ export default function Home() {
                     {article.desc}
                   </p>
                   <div className="pt-4 border-t border-slate-50 flex justify-between items-center">
-                    <span className="text-xs font-bold text-slate-400 group-hover:text-primary transition-colors">Baca Selengkapnya</span>
+                    <span className="text-xs font-bold text-slate-400 group-hover:text-primary transition-colors">Baca Publikasi</span>
                     <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-primary group-hover:text-white transition-all">
                       <ArrowUpRight size={14} />
                     </div>
@@ -356,30 +356,30 @@ export default function Home() {
                  </div>
               </div>
               <p className="text-slate-400 leading-relaxed font-medium">
-                Organisasi independen yang menjembatani aspirasi pelajar dengan pemangku kebijakan. Dari pelajar, oleh pelajar, untuk pendidikan yang lebih baik.
+                Institusi independen yang mendedikasikan diri sebagai jembatan aspirasi strategis generasi muda dengan otoritas pemangku kebijakan.
               </p>
             </div>
 
             <div className="flex flex-wrap gap-12 lg:gap-24">
               <div>
-                <h4 className="font-bold text-white mb-6">Organisasi</h4>
+                <h4 className="font-bold text-white mb-6">Kelembagaan</h4>
                 <ul className="space-y-4 text-slate-400 font-medium text-sm">
-                  <li><a href="#" className="hover:text-primary transition-colors">Profil Dewan</a></li>
+                  <li><a href="#" className="hover:text-primary transition-colors">Profil Institusi</a></li>
                   <li><a href="#" className="hover:text-primary transition-colors">Visi & Misi</a></li>
-                  <li><a href="#" className="hover:text-primary transition-colors">AD/ART</a></li>
-                  <li><a href="#" className="hover:text-primary transition-colors">Struktur</a></li>
+                  <li><a href="#" className="hover:text-primary transition-colors">Anggaran Dasar</a></li>
+                  <li><a href="#" className="hover:text-primary transition-colors">Fungsionaris</a></li>
                 </ul>
               </div>
               <div>
-                <h4 className="font-bold text-white mb-6">Kontak</h4>
+                <h4 className="font-bold text-white mb-6">Sekretariat</h4>
                 <ul className="space-y-4 text-slate-400 font-medium text-sm">
                   <li className="flex items-start gap-3">
                     <MapPin className="mt-0.5 text-primary" size={16} />
-                    <span>Gedung Pemuda,<br />Jawa Barat</span>
+                    <span>Gedung Pemuda,<br />Jawa Barat, Indonesia</span>
                   </li>
                   <li className="flex items-center gap-3">
                     <Mail className="text-primary" size={16} />
-                    sekjen@dagm.org
+                    sekretariat@dagm.org
                   </li>
                 </ul>
               </div>
@@ -387,10 +387,10 @@ export default function Home() {
           </div>
 
           <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500 font-medium">
-            <p>&copy; 2026 Dewan Aspirasi Generasi Muda. Hak Cipta Dilindungi.</p>
+            <p>&copy; 2026 Dewan Aspirasi Generasi Muda. Seluruh hak cipta dilindungi undang-undang.</p>
             <div className="flex gap-6">
               <a href="#" className="hover:text-white transition-colors">Kebijakan Privasi</a>
-              <a href="#" className="hover:text-white transition-colors">Syarat & Ketentuan</a>
+              <a href="#" className="hover:text-white transition-colors">Ketentuan Layanan</a>
             </div>
           </div>
         </div>

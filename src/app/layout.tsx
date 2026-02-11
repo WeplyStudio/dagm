@@ -4,7 +4,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: 'DAGM - Dewan Aspirasi Generasi Muda',
-  description: 'Wadah resmi pelajar untuk berdialektika dan merumuskan kebijakan pendidikan.',
+  description: 'Lembaga formal representasi pemuda untuk advokasi dan perumusan rekomendasi kebijakan pendidikan nasional.',
 };
 
 export default function RootLayout({
