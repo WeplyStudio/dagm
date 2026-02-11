@@ -1,0 +1,29 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "hero-summit",
+      "description": "Youth Legislative Meeting",
+      "imageUrl": "https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?auto=format&fit=crop&w=1350&q=80",
+      "imageHint": "legislative meeting"
+    },
+    {
+      "id": "news-meeting",
+      "description": "Council Session",
+      "imageUrl": "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80",
+      "imageHint": "business meeting"
+    },
+    {
+      "id": "news-opinion",
+      "description": "Writing Opinion",
+      "imageUrl": "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=800&q=80",
+      "imageHint": "writing paper"
+    },
+    {
+      "id": "news-press",
+      "description": "Press Release",
+      "imageUrl": "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80",
+      "imageHint": "press release"
+    }
+  ]
+}
