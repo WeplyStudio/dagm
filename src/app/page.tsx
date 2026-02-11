@@ -15,7 +15,11 @@ import {
   ArrowUpRight, 
   MapPin, 
   Mail,
-  ArrowRight
+  ArrowRight,
+  Monitor,
+  PieChart,
+  Globe,
+  Files
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AspirasiSection } from "@/components/AspirasiSection";
@@ -191,35 +195,74 @@ export default function Home() {
       {/* ASPIRASI FORM SECTION */}
       <AspirasiSection />
 
-      {/* PROGRAM GRID */}
-      <section id="program" className="py-24 bg-secondary/30">
+      {/* DEPARTEMEN SECTION */}
+      <section id="program" className="py-24 bg-white relative">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-lg transition-all group">
-              <div className="w-14 h-14 bg-emerald-100 text-primary rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300">
-                <MessageCircle size={32} strokeWidth={2.5} />
+          <div className="text-center mb-16">
+            <span className="bg-blue-50 text-blue-600 border border-blue-100 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">Bidang Kerja</span>
+            <h2 className="text-3xl font-extrabold text-slate-900 mt-6 font-headline">Departemen & Komisi</h2>
+            <p className="text-slate-500 mt-3 max-w-2xl mx-auto">Unit pelaksana teknis yang bergerak spesifik untuk menjalankan roda organisasi.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Dept 1: Aspirasi */}
+            <div className="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-xl hover:shadow-emerald-100/50 hover:border-primary transition-all group duration-300">
+              <div className="w-14 h-14 bg-emerald-100 text-primary rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                <Megaphone size={28} />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3 font-headline">Portal Aspirasi Digital</h3>
-              <p className="text-slate-500 text-sm leading-relaxed mb-6">Sistem manajemen integrasi untuk menghimpun, mengkategorikan, dan memproses masukan strategis konstituen muda secara administratif dan sistematis.</p>
-              <a href="#" className="text-sm font-bold text-primary flex items-center gap-2 hover:gap-3 transition-all">Dokumentasi <ChevronRight size={16} /></a>
+              <h3 className="text-xl font-bold text-slate-900 mb-3 font-headline">Dept. Aspirasi & Advokasi</h3>
+              <p className="text-sm text-slate-500 leading-relaxed mb-4">Gardu terdepan dalam menjaring, mengolah, dan mengawal aspirasi pelajar kepada pemangku kebijakan sekolah.</p>
+              <a href="#" className="inline-flex items-center text-xs font-bold text-primary uppercase tracking-wide group-hover:underline">Lihat Proker <ArrowRight className="ml-1" size={14} /></a>
             </div>
 
-            <div className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-lg transition-all group">
-              <div className="w-14 h-14 bg-amber-100 text-accent rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Landmark size={32} strokeWidth={2.5} />
+            {/* Dept 2: Kominfo */}
+            <div className="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-xl hover:shadow-blue-100/50 hover:border-blue-500 transition-all group duration-300">
+              <div className="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                <Monitor size={28} />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3 font-headline">Parlemen Muda</h3>
-              <p className="text-slate-500 text-sm leading-relaxed mb-6">Program penguatan kapasitas kepemimpinan melalui simulasi mekanisme persidangan legislatif dan penyusunan naskah regulasi formal tingkat lanjut.</p>
-              <a href="#" className="text-sm font-bold text-accent flex items-center gap-2 hover:gap-3 transition-all">Dokumentasi <ChevronRight size={16} /></a>
+              <h3 className="text-xl font-bold text-slate-900 mb-3 font-headline">Dept. Media & Informasi</h3>
+              <p className="text-sm text-slate-500 leading-relaxed mb-4">Mengelola publikasi digital, branding organisasi, dan penyebaran informasi kegiatan secara kreatif dan masif.</p>
+              <a href="#" className="inline-flex items-center text-xs font-bold text-blue-600 uppercase tracking-wide group-hover:underline">Lihat Proker <ArrowRight className="ml-1" size={14} /></a>
             </div>
 
-            <div className="bg-white p-8 rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-lg transition-all group">
-              <div className="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Handshake size={32} strokeWidth={2.5} />
+            {/* Dept 3: PSDM */}
+            <div className="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-xl hover:shadow-amber-100/50 hover:border-amber-500 transition-all group duration-300">
+              <div className="w-14 h-14 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                <Users size={28} />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3 font-headline">Audiensi Strategis</h3>
-              <p className="text-slate-500 text-sm leading-relaxed mb-6">Inisiatif koordinasi dan dialog interaktif bersama pemangku kepentingan otoritas legislatif dalam rangka evaluasi kebijakan sektor pendidikan.</p>
-              <a href="#" className="text-sm font-bold text-blue-600 flex items-center gap-2 hover:gap-3 transition-all">Dokumentasi <ChevronRight size={16} /></a>
+              <h3 className="text-xl font-bold text-slate-900 mb-3 font-headline">Dept. PSDM</h3>
+              <p className="text-sm text-slate-500 leading-relaxed mb-4">Fokus pada kaderisasi, pelatihan kepemimpinan, dan peningkatan soft-skill seluruh anggota dewan.</p>
+              <a href="#" className="inline-flex items-center text-xs font-bold text-amber-600 uppercase tracking-wide group-hover:underline">Lihat Proker <ArrowRight className="ml-1" size={14} /></a>
+            </div>
+
+            {/* Dept 4: Riset */}
+            <div className="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-xl hover:shadow-purple-100/50 hover:border-purple-500 transition-all group duration-300">
+              <div className="w-14 h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                <PieChart size={28} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-3 font-headline">Dept. Riset & Data</h3>
+              <p className="text-sm text-slate-500 leading-relaxed mb-4">Melakukan kajian berbasis data terkait isu pendidikan terkini sebagai landasan perumusan rekomendasi.</p>
+              <a href="#" className="inline-flex items-center text-xs font-bold text-purple-600 uppercase tracking-wide group-hover:underline">Lihat Proker <ArrowRight className="ml-1" size={14} /></a>
+            </div>
+
+            {/* Dept 5: Hublu */}
+            <div className="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-xl hover:shadow-teal-100/50 hover:border-teal-500 transition-all group duration-300">
+              <div className="w-14 h-14 bg-teal-100 text-teal-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                <Globe size={28} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-3 font-headline">Dept. Hubungan Lembaga</h3>
+              <p className="text-sm text-slate-500 leading-relaxed mb-4">Membangun jejaring kerjasama strategis dengan OSIS sekolah lain, instansi pemerintah, dan NGO.</p>
+              <a href="#" className="inline-flex items-center text-xs font-bold text-teal-600 uppercase tracking-wide group-hover:underline">Lihat Proker <ArrowRight className="ml-1" size={14} /></a>
+            </div>
+
+            {/* Dept 6: Kestari */}
+            <div className="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-xl hover:shadow-rose-100/50 hover:border-rose-500 transition-all group duration-300">
+              <div className="w-14 h-14 bg-rose-100 text-rose-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform">
+                <Files size={28} />
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-3 font-headline">Kesekretariatan</h3>
+              <p className="text-sm text-slate-500 leading-relaxed mb-4">Menangani administrasi, surat-menyurat, arsip dokumen, serta inventaris aset organisasi agar tertib.</p>
+              <a href="#" className="inline-flex items-center text-xs font-bold text-rose-600 uppercase tracking-wide group-hover:underline">Lihat Proker <ArrowRight className="ml-1" size={14} /></a>
             </div>
           </div>
         </div>
