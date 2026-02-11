@@ -225,48 +225,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* STRUKTUR ORGANISASI */}
-      <section className="py-24 bg-white relative border-t border-slate-100">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-            <div>
-              <span className="text-primary font-bold uppercase tracking-wider text-xs">Pimpinan Dewan</span>
-              <h2 className="text-3xl font-extrabold text-slate-900 mt-2 font-headline">Badan Pengurus Harian</h2>
-            </div>
-            <Button variant="outline" className="rounded-full font-bold">
-              Struktur Fungsional
-            </Button>
-          </div>
-
-          <div className="space-y-4">
-            {[
-              { name: "Farhan Aditya", role: "Ketua Dewan", institution: "SMAN 3 Bandung", color: "bg-emerald-600", accent: "text-emerald-600" },
-              { name: "Nadina Putri", role: "Wakil Ketua I", institution: "SMA Telkom Bandung", color: "bg-amber-600", accent: "text-amber-600" },
-              { name: "Rizky Fauzan", role: "Sekretaris Jenderal", institution: "SMAN 1 Bogor", color: "bg-blue-600", accent: "text-blue-600" }
-            ].map((person, idx) => (
-              <div key={idx} className="group flex items-center justify-between p-4 md:p-6 rounded-2xl bg-white border border-slate-100 hover:border-emerald-200 hover:shadow-md transition-all">
-                <div className="flex items-center gap-4 md:gap-6">
-                  <div className={`w-16 h-16 rounded-xl ${person.color} overflow-hidden relative flex items-center justify-center text-white font-bold text-xl`}>
-                    {person.name.split(' ').map(n => n[0]).join('')}
-                  </div>
-                  <div>
-                    <h4 className="text-lg font-bold text-slate-900 font-headline">{person.name}</h4>
-                    <p className={`text-sm ${person.accent} font-medium`}>{person.role}</p>
-                  </div>
-                </div>
-                <div className="hidden md:block text-right">
-                  <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">Afiliasi Institusi</p>
-                  <p className="text-sm font-semibold text-slate-700">{person.institution}</p>
-                </div>
-                <div className="w-10 h-10 rounded-full border border-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-primary group-hover:text-white group-hover:border-transparent transition-all">
-                  <ChevronRight size={18} strokeWidth={2.5} />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* BERITA SECTION */}
       <section id="berita" className="py-24 bg-slate-50 border-t border-slate-200">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
