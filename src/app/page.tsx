@@ -32,9 +32,6 @@ export default function Home() {
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
             <div className="flex items-center gap-3 cursor-pointer">
-              <div className="w-10 h-10 bg-primary text-white rounded-lg flex items-center justify-center shadow-md transform rotate-3">
-                {/* Icon removed */}
-              </div>
               <div className="flex flex-col justify-center leading-tight">
                 <span className="font-bold text-lg text-slate-900 tracking-tight">DAGM</span>
                 <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Dewan Aspirasi Generasi Muda</span>
@@ -355,9 +352,6 @@ export default function Home() {
           <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-16">
             <div className="max-w-md">
               <div className="flex items-center gap-3 mb-6">
-                 <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center shadow-lg transform rotate-3">
-                   {/* Icon removed */}
-                 </div>
                  <div className="flex flex-col">
                    <span className="font-bold text-2xl tracking-tight leading-none">DAGM</span>
                    <span className="text-xs text-slate-400 font-medium tracking-widest uppercase">Indonesia</span>
