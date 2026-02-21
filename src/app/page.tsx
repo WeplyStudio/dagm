@@ -28,7 +28,7 @@ export default function Home() {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Custom Cursor
+    // Kursor Kustom
     const cursor = cursorRef.current;
     if (cursor) {
       const onMouseMove = (e: MouseEvent) => {
@@ -43,7 +43,7 @@ export default function Home() {
       });
     }
 
-    // Hero Animations
+    // Animasi Hero
     gsap.from(".hero-reveal", { 
       y: 40, 
       opacity: 0, 
@@ -52,7 +52,7 @@ export default function Home() {
       ease: "power4.out" 
     });
 
-    // Stacked Cards Logic
+    // Logika Kartu Bertumpuk (Stacked Cards)
     const stackItems = gsap.utils.toArray(".stack-item");
     stackItems.forEach((card: any, i, arr) => {
       if (i !== arr.length - 1) {
@@ -70,7 +70,7 @@ export default function Home() {
       }
     });
 
-    // Horizontal Scroll Gallery
+    // Galeri Gulir Horizontal
     if (horizontalTrackRef.current) {
       const track = horizontalTrackRef.current;
       gsap.to(track, {
@@ -88,7 +88,7 @@ export default function Home() {
       });
     }
 
-    // Statistics Counter
+    // Penghitung Statistik
     const counters = document.querySelectorAll('.counter');
     counters.forEach(counter => {
       const target = +(counter.getAttribute('data-target') || 0);
@@ -103,7 +103,7 @@ export default function Home() {
       });
     });
 
-    // Form Reveal
+    // Pendedahan Formulir
     gsap.from(".reveal-form", {
       y: 50,
       opacity: 0,
@@ -172,7 +172,7 @@ export default function Home() {
     <div className="bg-white">
       <div id="cursor" ref={cursorRef} className="hidden lg:block"></div>
 
-      {/* SIDE MENU OVERLAY */}
+      {/* TAMPILAN MENU SAMPING */}
       <div id="side-menu" ref={sideMenuRef}>
         <button onClick={closeMenu} className="absolute top-10 right-10 text-white group flex flex-col items-end">
           <div className="text-[10px] uppercase tracking-[0.4em] mb-2 opacity-50 group-hover:opacity-100 transition-opacity">Tutup</div>
@@ -190,7 +190,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* NAVIGATION */}
+      {/* NAVIGASI UTAMA */}
       <nav className="fixed w-full z-[100] bg-white/80 backdrop-blur-xl border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-8 h-24 flex items-center justify-between">
           <a href="#" className="flex items-center">
@@ -213,7 +213,7 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* HERO SECTION */}
+      {/* BAGIAN HERO */}
       <section className="min-h-screen flex flex-col justify-center px-8 relative overflow-hidden">
         <div className="max-w-6xl mx-auto w-full pt-48 pb-20">
           <h2 className="text-[11px] uppercase tracking-[0.6em] text-gray-600 mb-10 hero-reveal text-kern font-semibold">EST. 2026 / INSTITUSI ASPIRASI</h2>
@@ -231,7 +231,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* STACKED PILLARS */}
+      {/* PILAR BERTUMPUK (STACKED PILLARS) */}
       <section id="departments" className="py-40 bg-gray-50/20">
         <div className="max-w-5xl mx-auto px-8">
           <div className="mb-32">
@@ -240,24 +240,24 @@ export default function Home() {
           </div>
           <div className="relative">
             {Pillars.map((p, idx) => (
-              <div key={idx} className="stack-item bg-white border border-gray-100 p-12 md:p-20 rounded-[3rem] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.05)]">
-                <div className="flex justify-between items-start mb-12">
+              <div key={idx} className="stack-item bg-white border border-gray-100 p-8 md:p-20 rounded-[3rem] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.05)] overflow-hidden">
+                <div className="flex justify-between items-start mb-10 md:mb-12">
                   <div className="flex flex-col gap-6">
-                    <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center text-black shadow-sm">
-                      <p.icon size={32} strokeWidth={1.5} />
+                    <div className="w-12 h-12 md:w-16 md:h-16 bg-gray-50 rounded-2xl flex items-center justify-center text-black shadow-sm">
+                      <p.icon size={28} className="md:w-8 md:h-8" strokeWidth={1.5} />
                     </div>
-                    <h4 className="text-4xl font-medium">{p.title}</h4>
+                    <h4 className="text-2xl md:text-5xl font-medium tracking-tight leading-tight">{p.title}</h4>
                   </div>
-                  <span className="text-xs font-bold text-gray-200 tracking-[0.5em]">{p.id}</span>
+                  <span className="text-[10px] md:text-xs font-bold text-gray-200 tracking-[0.5em]">{p.id}</span>
                 </div>
-                <p className="text-gray-500 font-light leading-relaxed max-w-xl text-kern">{p.desc}</p>
+                <p className="text-gray-500 font-light leading-relaxed max-w-xl text-kern text-base md:text-lg">{p.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* IMPACT STATS */}
+      {/* STATISTIK DAMPAK */}
       <section className="py-40 bg-white">
         <div className="max-w-7xl mx-auto px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-20 border-y border-gray-100 py-32">
@@ -280,7 +280,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TEAM SECTION */}
+      {/* BAGIAN TIM */}
       <section id="team" className="py-40 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8 text-kern">
@@ -314,7 +314,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* JEJAK LANGKAH (HORIZONTAL) - BLACK BG */}
+      {/* JEJAK LANGKAH (HORIZONTAL) */}
       <section id="gallery" className="py-20 bg-[#0a0a0a] border-t border-gray-900">
         <div id="gallery-horizontal">
           <div className="horizontal-sticky">
@@ -323,20 +323,20 @@ export default function Home() {
                 <h2 className="text-[10px] uppercase tracking-[0.5em] text-gray-600 mb-8">Dokumentasi</h2>
                 <h3 className="text-5xl font-medium tracking-tighter leading-none text-white text-kern">Jejak Langkah Kolektif.</h3>
               </div>
-              <div className="horizontal-item"><img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1200" className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" alt="Gallery 1" /></div>
-              <div className="horizontal-item"><img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=1200" className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" alt="Gallery 2" /></div>
-              <div className="horizontal-item"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1200" className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" alt="Gallery 3" /></div>
-              <div className="horizontal-item"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1200" className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" alt="Gallery 4" /></div>
-              <div className="horizontal-item"><img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=1200" className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" alt="Gallery 5" /></div>
+              <div className="horizontal-item"><img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1200" className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" alt="Galeri 1" /></div>
+              <div className="horizontal-item"><img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=1200" className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" alt="Galeri 2" /></div>
+              <div className="horizontal-item"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1200" className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" alt="Galeri 3" /></div>
+              <div className="horizontal-item"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1200" className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" alt="Galeri 4" /></div>
+              <div className="horizontal-item"><img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=1200" className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" alt="Galeri 5" /></div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ASPIRASI SECTION - WHITE BG */}
+      {/* BAGIAN ASPIRASI */}
       <AspirasiSection />
 
-      {/* FOOTER */}
+      {/* KAKI LAMAN (FOOTER) */}
       <footer className="bg-[#0a0a0a] text-white pt-40 pb-16 overflow-hidden">
         <div className="max-w-7xl mx-auto px-8">
           <div className="grid md:grid-cols-12 gap-16 mb-40">
