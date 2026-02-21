@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useEffect, useRef } from 'react';
@@ -9,7 +8,6 @@ import {
   ChevronLeft, 
   ChevronRight, 
   X,
-  Menu,
 } from "lucide-react";
 import { AspirasiSection } from "@/components/AspirasiSection";
 import { Toaster } from "@/components/ui/toaster";
@@ -62,17 +60,6 @@ export default function Home() {
             scrub: true
           }
         });
-      }
-    });
-
-    // Lens reveal effect - FROM THE CENTER (0% to 100%)
-    gsap.to(".lens-visual", {
-      clipPath: "circle(100% at 50% 50%)",
-      scrollTrigger: {
-        trigger: ".lens-container",
-        start: "top top",
-        end: "bottom bottom",
-        scrub: 1.5
       }
     });
 
@@ -254,18 +241,6 @@ export default function Home() {
                 <p className="text-gray-500 font-light leading-relaxed max-w-xl text-kern">{p.desc}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* VISION LENS - FROM THE CENTER */}
-      <section className="lens-container">
-        <div className="lens-visual">
-          <div className="max-w-4xl px-12 text-center text-white">
-            <h2 className="text-[10px] uppercase tracking-[1.2em] mb-16 opacity-40">Visi Melampaui Batas</h2>
-            <p className="text-4xl md:text-[64px] font-light tracking-tighter leading-tight text-kern">
-              "Memberikan wadah bagi setiap <span className="text-gray-500">aspirasi</span> untuk menjadi <span className="italic underline decoration-1">perubahan nyata</span>."
-            </p>
           </div>
         </div>
       </section>
