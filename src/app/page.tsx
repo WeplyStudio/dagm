@@ -2,19 +2,14 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import Image from 'next/image';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
-  ArrowRight, 
   ArrowUpRight, 
   ChevronLeft, 
   ChevronRight, 
   X,
   Menu,
-  Instagram,
-  Linkedin,
-  Twitter
 } from "lucide-react";
 import { AspirasiSection } from "@/components/AspirasiSection";
 import { Toaster } from "@/components/ui/toaster";
@@ -70,7 +65,7 @@ export default function Home() {
       }
     });
 
-    // Lens reveal effect
+    // Lens reveal effect - FROM THE CENTER (0% to 100%)
     gsap.to(".lens-visual", {
       clipPath: "circle(100% at 50% 50%)",
       scrollTrigger: {
@@ -145,38 +140,38 @@ export default function Home() {
     document.body.style.overflow = 'auto';
   };
 
-  // Team Slider Logic
-  let teamIndex = 0;
   const moveTeam = (dir: number) => {
     if (!teamTrackRef.current) return;
     const cards = teamTrackRef.current.children.length;
     const visibleCards = window.innerWidth >= 768 ? 3 : 1;
     const maxIndex = cards - visibleCards;
     
-    teamIndex += dir;
-    if (teamIndex < 0) teamIndex = maxIndex;
-    if (teamIndex > maxIndex) teamIndex = 0;
-
+    let currentX = gsap.getProperty(teamTrackRef.current, "x") as number;
     const cardWidth = (teamTrackRef.current.children[0] as HTMLElement).offsetWidth + 24;
-    gsap.to(teamTrackRef.current, { x: -teamIndex * cardWidth, duration: 0.8, ease: "power4.out" });
+    
+    let newIndex = Math.round(-currentX / cardWidth) + dir;
+    if (newIndex < 0) newIndex = maxIndex;
+    if (newIndex > maxIndex) newIndex = 0;
+
+    gsap.to(teamTrackRef.current, { x: -newIndex * cardWidth, duration: 0.8, ease: "power4.out" });
   };
 
   const Pillars = [
-    { id: "01", title: "Media Kreatif", desc: "Pusat narasi visual dan pengelola konten digital strategis untuk menjangkau audiens secara luas." },
-    { id: "02", title: "Hubungan Masyarakat", desc: "Membangun kemitraan strategis dengan pemangku kepentingan nasional maupun internasional." },
-    { id: "03", title: "Wirausaha & Masyarakat", desc: "Mendorong kemandirian ekonomi pemuda dan aksi pemberdayaan sosial berbasis komunitas." },
-    { id: "04", title: "Pendidikan Literasi", desc: "Meningkatkan kapasitas intelektual pemuda menghadapi era disrupsi informasi nasional." },
-    { id: "05", title: "Aspirasi & Advokasi", desc: "Garda terdepan dalam menyerap suara pemuda Indonesia untuk diolah menjadi rekomendasi kebijakan." },
-    { id: "06", title: "Pengembangan Organisasi", desc: "Menjamin kelestarian organisasi melalui pengelolaan SDM profesional dan sistem internal." },
-    { id: "HQ", title: "Sekretariat Jenderal", desc: "Pusat kontrol administrasi dan koordinasi lintas departemen untuk sinkronisasi program kerja." }
+    { id: "01", title: "Aspirasi & Advokasi", desc: "Garda terdepan dalam menjaring, mengolah, dan mengawal aspirasi pemuda kepada pemangku kebijakan nasional." },
+    { id: "02", title: "Media Kreatif", desc: "Pusat narasi visual dan pengelola konten digital strategis untuk menjangkau konstituen secara luas." },
+    { id: "03", title: "Humas & Kemitraan", desc: "Membangun kemitraan strategis dengan institusi pemerintah, NGO, dan pemangku kepentingan internasional." },
+    { id: "04", title: "Pengembangan Organisasi", desc: "Menjamin kelestarian lembaga melalui pengelolaan SDM profesional, kaderisasi, dan sistem internal." },
+    { id: "05", title: "Pendidikan Literasi", desc: "Meningkatkan kapasitas intelektual pemuda menghadapi era disrupsi informasi melalui program literasi." },
+    { id: "06", title: "Kewirausahaan", desc: "Mendorong kemandirian ekonomi pemuda melalui aksi pemberdayaan ekonomi berbasis inovasi." },
+    { id: "HQ", title: "Sekretariat Jenderal", desc: "Pusat kontrol administrasi, surat-menyurat, dan koordinasi lintas departemen untuk sinkronisasi program." }
   ];
 
   const Team = [
-    { name: "Alexandros V.", role: "Pengasas", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800" },
+    { name: "Alexandros V.", role: "Pendiri Dewan", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800" },
     { name: "David Gilmore", role: "Ketua Umum", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800" },
-    { name: "Gerard White", role: "Timbalan Ketua", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800" },
-    { name: "Elena R.", role: "Setiausaha I", img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800" },
-    { name: "Marcus A.", role: "Bendahari I", img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800" }
+    { name: "Gerard White", role: "Wakil Ketua", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800" },
+    { name: "Elena R.", role: "Sekretaris I", img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800" },
+    { name: "Marcus A.", role: "Bendahara I", img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800" }
   ];
 
   return (
@@ -204,9 +199,9 @@ export default function Home() {
       {/* NAVIGATION */}
       <nav className="fixed w-full z-[100] bg-white/80 backdrop-blur-xl border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-8 h-24 flex items-center justify-between">
-          <a href="#" className="flex flex-col">
-            <span className="text-xl font-bold tracking-tighter uppercase leading-none">DAGM</span>
-            <span className="text-[10px] text-gray-400 font-medium tracking-[0.2em] uppercase mt-1 hidden sm:inline">Dewan Aspirasi Generasi Muda</span>
+          <a href="#" className="flex items-center">
+            <span className="text-xl font-bold tracking-tighter uppercase">DAGM</span>
+            <span className="text-[10px] text-gray-400 font-medium tracking-[0.2em] uppercase ml-6 hidden sm:inline">Dewan Aspirasi Generasi Muda</span>
           </a>
 
           <div className="flex items-center space-x-12">
@@ -228,12 +223,12 @@ export default function Home() {
       <section className="min-h-screen flex flex-col justify-center px-8 relative overflow-hidden">
         <div className="max-w-6xl mx-auto w-full pt-48 pb-20">
           <h2 className="text-[11px] uppercase tracking-[0.6em] text-gray-600 mb-10 hero-reveal text-kern font-semibold">Est. 2026 / Institusi Aspirasi</h2>
-          <h1 className="text-5xl md:text-[110px] font-medium tracking-tighter leading-[0.85] mb-16 hero-reveal">
-            Masa Depan <br /> Bangsa Berawal <br /> dari <span className="italic text-gray-200">Gagasan.</span>
+          <h1 className="text-5xl md:text-[64px] font-medium tracking-tighter leading-[0.85] mb-16 hero-reveal">
+            Dewan Aspirasi <br /> Generasi Muda.
           </h1>
           <div className="flex flex-col md:flex-row md:items-start gap-12 hero-reveal">
             <p className="text-xl font-light text-gray-400 max-w-sm leading-relaxed text-kern">
-              Dewan Aspirasi Generasi Muda hadir sebagai katalisator kebijakan strategis bagi pemuda Indonesia menuju Indonesia Emas.
+              Masa depan bangsa berawal dari gagasan. Kami hadir sebagai katalisator kebijakan strategis bagi pemuda Indonesia.
             </p>
             <div className="flex flex-col gap-4">
               <a href="#aspiration" className="text-[10px] uppercase tracking-widest font-bold border-b border-black pb-2 w-fit hover:text-gray-500 transition">Sampaikan Suara Anda</a>
@@ -263,7 +258,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* VISION LENS */}
+      {/* VISION LENS - FROM THE CENTER */}
       <section className="lens-container">
         <div className="lens-visual">
           <div className="max-w-4xl px-12 text-center text-white">
