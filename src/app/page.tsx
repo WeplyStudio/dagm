@@ -8,6 +8,13 @@ import {
   ChevronLeft, 
   ChevronRight, 
   X,
+  Palette,
+  Globe,
+  Briefcase,
+  BookOpen,
+  Megaphone,
+  Users,
+  ShieldCheck
 } from "lucide-react";
 import { AspirasiSection } from "@/components/AspirasiSection";
 import { Toaster } from "@/components/ui/toaster";
@@ -144,13 +151,13 @@ export default function Home() {
   };
 
   const Pillars = [
-    { id: "01", title: "Media Kreatif", desc: "Pusat narasi visual dan pengelola konten digital strategis untuk menjangkau audiens secara luas." },
-    { id: "02", title: "Hubungan Masyarakat", desc: "Membangun kemitraan strategis dengan pemangku kepentingan nasional maupun internasional." },
-    { id: "03", title: "Wirausaha & Masyarakat", desc: "Mendorong kemandirian ekonomi pemuda dan aksi pemberdayaan sosial berbasis komunitas." },
-    { id: "04", title: "Pendidikan Literasi", desc: "Meningkatkan kapasitas intelektual pemuda menghadapi era disrupsi informasi nasional." },
-    { id: "05", title: "Aspirasi & Advokasi", desc: "Garda terdepan dalam menyerap suara pemuda Indonesia untuk diolah menjadi rekomendasi kebijakan." },
-    { id: "06", title: "Pengembangan Organisasi", desc: "Menjamin kelestarian organisasi melalui pengelolaan SDM profesional dan sistem internal." },
-    { id: "HQ", title: "Sekretaris Jenderal", desc: "Pusat kendali administrasi dan koordinasi lintas departemen untuk sinkronisasi program kerja." }
+    { id: "01", title: "Media Kreatif", desc: "Pusat narasi visual dan pengelola konten digital strategis untuk menjangkau audiens secara luas.", icon: Palette },
+    { id: "02", title: "Hubungan Masyarakat", desc: "Membangun kemitraan strategis dengan pemangku kepentingan nasional maupun internasional.", icon: Globe },
+    { id: "03", title: "Wirausaha & Masyarakat", desc: "Mendorong kemandirian ekonomi pemuda dan aksi pemberdayaan sosial berbasis komunitas.", icon: Briefcase },
+    { id: "04", title: "Pendidikan Literasi", desc: "Meningkatkan kapasitas intelektual pemuda menghadapi era disrupsi informasi nasional.", icon: BookOpen },
+    { id: "05", title: "Aspirasi & Advokasi", desc: "Garda terdepan dalam menyerap suara pemuda Indonesia untuk diolah menjadi rekomendasi kebijakan.", icon: Megaphone },
+    { id: "06", title: "Pengembangan Organisasi", desc: "Menjamin kelestarian organisasi melalui pengelolaan sumber daya manusia profesional dan sistem internal.", icon: Users },
+    { id: "HQ", title: "Sekretariat Jenderal", desc: "Pusat kendali administrasi dan koordinasi lintas departemen untuk sinkronisasi program kerja.", icon: ShieldCheck }
   ];
 
   const Team = [
@@ -209,7 +216,7 @@ export default function Home() {
       {/* HERO SECTION */}
       <section className="min-h-screen flex flex-col justify-center px-8 relative overflow-hidden">
         <div className="max-w-6xl mx-auto w-full pt-48 pb-20">
-          <h2 className="text-[11px] uppercase tracking-[0.6em] text-gray-600 mb-10 hero-reveal text-kern font-semibold">Est. 2026 / Institusi Aspirasi</h2>
+          <h2 className="text-[11px] uppercase tracking-[0.6em] text-gray-600 mb-10 hero-reveal text-kern font-semibold">EST. 2026 / INSTITUSI ASPIRASI</h2>
           <h1 className="text-6xl md:text-[4rem] font-medium tracking-tighter leading-[0.85] mb-16 hero-reveal">
             Masa Depan <br /> Bangsa Berawal <br /> dari <span className="italic text-gray-200">Gagasan.</span>
           </h1>
@@ -235,7 +242,12 @@ export default function Home() {
             {Pillars.map((p, idx) => (
               <div key={idx} className="stack-item bg-white border border-gray-100 p-12 md:p-20 rounded-[3rem] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.05)]">
                 <div className="flex justify-between items-start mb-12">
-                  <h4 className="text-4xl font-medium">{p.title}</h4>
+                  <div className="flex flex-col gap-6">
+                    <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center text-black shadow-sm">
+                      <p.icon size={32} strokeWidth={1.5} />
+                    </div>
+                    <h4 className="text-4xl font-medium">{p.title}</h4>
+                  </div>
                   <span className="text-xs font-bold text-gray-200 tracking-[0.5em]">{p.id}</span>
                 </div>
                 <p className="text-gray-500 font-light leading-relaxed max-w-xl text-kern">{p.desc}</p>
@@ -329,7 +341,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-8">
           <div className="grid md:grid-cols-12 gap-16 mb-40">
             <div className="md:col-span-6">
-              <h2 className="text-4xl md:text-5xl font-medium tracking-tighter leading-tight mb-12 text-kern">Mari cipta impak <br /> besar bersama DAGM.</h2>
+              <h2 className="text-4xl md:text-5xl font-medium tracking-tighter leading-tight mb-12 text-kern">Mari ciptakan dampak <br /> besar bersama DAGM.</h2>
               <a href="mailto:sekretariat@dagm.org" className="flex items-center gap-6 group cursor-pointer w-fit">
                 <div className="w-16 h-16 rounded-full border border-gray-800 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-500">
                   <ArrowUpRight size={24} />

@@ -22,7 +22,7 @@ export function AspirasiSection() {
       setSubmitted(true);
       toast({
         title: "Dokumen Aspirasi Diterima",
-        description: "Aspirasi Anda telah terdaftar dalam sistem dewan untuk proses penelaahan lebih lanjut."
+        description: "Aspirasi Anda telah terdaftar dalam sistem dewan untuk proses penelaahan lebih lanjut secara resmi."
       });
     }, 1500);
   };
@@ -36,7 +36,7 @@ export function AspirasiSection() {
           </div>
           <h3 className="text-4xl md:text-5xl font-medium tracking-tighter mb-6">Registrasi Berhasil</h3>
           <p className="text-gray-400 text-lg font-light leading-relaxed mb-12">
-            Kontribusi pemikiran Anda telah tercatat secara resmi sebagai bagian dari database aspirasi strategis nasional.
+            Kontribusi pemikiran Anda telah tercatat secara resmi sebagai bagian dari pangkalan data aspirasi strategis nasional.
           </p>
           <Button 
             onClick={() => {
@@ -72,7 +72,7 @@ export function AspirasiSection() {
               />
             </div>
             <div className="border-b border-gray-800 py-6 focus-within:border-white transition-all duration-300">
-              <Label htmlFor="email" className="text-[10px] uppercase font-bold text-gray-500 block mb-4 tracking-widest">Alamat Email</Label>
+              <Label htmlFor="email" className="text-[10px] uppercase font-bold text-gray-500 block mb-4 tracking-widest">Alamat Surel</Label>
               <Input 
                 id="email" 
                 type="email"
