@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { 
@@ -20,20 +20,21 @@ import {
 import { AspirasiSection } from "@/components/AspirasiSection";
 import { Toaster } from "@/components/ui/toaster";
 import { useFirestore, useCollection, useMemoFirebase } from '@/firebase';
-import { collection, query, limit } from 'firebase/firestore';
+import { collection, query, limit, orderBy } from 'firebase/firestore';
 
 export default function Home() {
   const sideMenuRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
   const teamTrackRef = useRef<HTMLDivElement>(null);
   const horizontalTrackRef = useRef<HTMLDivElement>(null);
+  const [teamIndex, setTeamIndex] = useState(0);
 
   const db = useFirestore();
 
-  // Fetch real data
+  // Mengambil data nyata dari Firestore
   const aspirationsQuery = useMemoFirebase(() => query(collection(db, 'aspirations')), [db]);
   const membersQuery = useMemoFirebase(() => query(collection(db, 'members')), [db]);
-  const galleryQuery = useMemoFirebase(() => query(collection(db, 'gallery_images'), limit(6)), [db]);
+  const galleryQuery = useMemoFirebase(() => query(collection(db, 'gallery_images'), orderBy('uploadedAt', 'desc'), limit(10)), [db]);
 
   const { data: aspirations } = useCollection(aspirationsQuery);
   const { data: members } = useCollection(membersQuery);
@@ -41,6 +42,7 @@ export default function Home() {
 
   const aspirationCount = aspirations?.length || 0;
 
+  // Efek Cursor dan Reveal Hero
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
@@ -83,27 +85,49 @@ export default function Home() {
       }
     });
 
-    if (horizontalTrackRef.current) {
-      const track = horizontalTrackRef.current;
-      gsap.to(track, {
-        x: () => -(track.scrollWidth - window.innerWidth),
-        ease: "none",
-        scrollTrigger: {
-          trigger: "#gallery-horizontal",
-          start: "top top",
-          end: () => `+=${track.scrollWidth - window.innerWidth}`,
-          scrub: 0.8,
-          pin: true,
-          invalidateOnRefresh: true,
-          anticipatePin: 1
-        }
-      });
-    }
-
     return () => {
       ScrollTrigger.getAll().forEach(t => t.kill());
     };
   }, []);
+
+  // Efek Khusus untuk Galeri Horizontal (Menunggu Data)
+  useEffect(() => {
+    if (!gallery || gallery.length === 0 || !horizontalTrackRef.current) return;
+
+    // Refresh ScrollTrigger agar menghitung ulang lebar kontainer yang baru dimuat
+    ScrollTrigger.refresh();
+
+    const track = horizontalTrackRef.current;
+    const animation = gsap.to(track, {
+      x: () => -(track.scrollWidth - window.innerWidth),
+      ease: "none",
+      scrollTrigger: {
+        trigger: "#gallery-horizontal",
+        start: "top top",
+        end: () => `+=${track.scrollWidth - window.innerWidth}`,
+        scrub: 1,
+        pin: true,
+        invalidateOnRefresh: true,
+        anticipatePin: 1
+      }
+    });
+
+    return () => {
+      animation.scrollTrigger?.kill();
+      animation.kill();
+    };
+  }, [gallery]);
+
+  // Efek Auto-Slide untuk Slider Tim
+  useEffect(() => {
+    if (!members || members.length <= 1) return;
+
+    const interval = setInterval(() => {
+      moveTeam(1);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [members]);
 
   const openMenu = () => {
     const tl = gsap.timeline();
@@ -120,26 +144,27 @@ export default function Home() {
   };
 
   const moveTeam = (dir: number) => {
-    if (!teamTrackRef.current) return;
-    const cards = teamTrackRef.current.children.length;
-    if (cards === 0) return;
+    if (!teamTrackRef.current || !members) return;
+    const cards = members.length;
     const visibleCards = window.innerWidth >= 768 ? 3 : 1;
     const maxIndex = Math.max(0, cards - visibleCards);
     
-    let currentX = gsap.getProperty(teamTrackRef.current, "x") as number;
-    const cardElement = teamTrackRef.current.children[0] as HTMLElement;
-    if (!cardElement) return;
-    const cardWidth = cardElement.offsetWidth + 24;
-    
-    let newIndex = Math.round(-currentX / cardWidth) + dir;
-    if (newIndex < 0) newIndex = maxIndex;
-    if (newIndex > maxIndex) newIndex = 0;
-
-    gsap.to(teamTrackRef.current, { x: -newIndex * cardWidth, duration: 0.8, ease: "power4.out" });
+    setTeamIndex((prev) => {
+      let next = prev + dir;
+      if (next < 0) next = maxIndex;
+      if (next > maxIndex) next = 0;
+      
+      const cardElement = teamTrackRef.current?.children[0] as HTMLElement;
+      if (cardElement) {
+        const cardWidth = cardElement.offsetWidth + 24;
+        gsap.to(teamTrackRef.current, { x: -next * cardWidth, duration: 1, ease: "expo.out" });
+      }
+      return next;
+    });
   };
 
   const Pillars = [
-    { id: "01", title: "Media Kreatif", desc: "Pusat narasi visual dan pengelola konten digital strategis untuk menjangkau audiens secara luas.", icon: Palette },
+    { id: "01", title: "Media Kreatif", desc: "Pusat narasi visual dan pengelola konten digital strategis untuk menjangkau khalayak secara luas.", icon: Palette },
     { id: "02", title: "Hubungan Masyarakat", desc: "Membangun kemitraan strategis dengan pemangku kepentingan nasional maupun internasional.", icon: Globe },
     { id: "03", title: "Wirausaha & Masyarakat", desc: "Mendorong kemandirian ekonomi pemuda dan aksi pemberdayaan sosial berbasis komunitas.", icon: Briefcase },
     { id: "04", title: "Pendidikan Literasi", desc: "Meningkatkan kapasitas intelektual pemuda menghadapi era disrupsi informasi nasional.", icon: BookOpen },
@@ -158,12 +183,12 @@ export default function Home() {
           <X size={40} strokeWidth={1.5} />
         </button>
         <div className="flex flex-col text-white">
-          <a href="#departments" onClick={closeMenu} className="menu-link">Pilar</a>
-          <a href="#team" onClick={closeMenu} className="menu-link">Struktur</a>
-          <a href="#gallery" onClick={closeMenu} className="menu-link">Jejak</a>
-          <a href="#aspiration" onClick={closeMenu} className="menu-link">Aspirasi</a>
-          <a href="mailto:sekretariat@dagm.org" onClick={closeMenu} className="menu-link">Hubungi</a>
-          <a href="/admin" onClick={closeMenu} className="menu-link text-gray-600">Admin</a>
+          <a href="#departments" onClick={closeMenu} className="menu-link text-kern">Pilar</a>
+          <a href="#team" onClick={closeMenu} className="menu-link text-kern">Struktur</a>
+          <a href="#gallery" onClick={closeMenu} className="menu-link text-kern">Jejak</a>
+          <a href="#aspiration" onClick={closeMenu} className="menu-link text-kern">Aspirasi</a>
+          <a href="mailto:sekretariat@dagm.org" onClick={closeMenu} className="menu-link text-kern">Hubungi</a>
+          <a href="/admin" onClick={closeMenu} className="menu-link text-gray-600 text-kern">Panel Admin</a>
         </div>
         <div className="mt-20 flex gap-10 text-white opacity-30 text-[10px] uppercase tracking-[0.5em]">
           <span>Instagram</span><span>LinkedIn</span><span>Twitter</span>
@@ -179,9 +204,9 @@ export default function Home() {
 
           <div className="flex items-center space-x-12">
             <div className="hidden md:flex space-x-12 text-[10px] uppercase tracking-[0.3em] font-medium text-gray-400">
-              <a href="#departments" className="hover:text-black transition text-kern">Pilar</a>
-              <a href="#team" className="hover:text-black transition text-kern">Struktur</a>
-              <a href="#aspiration" className="hover:text-black transition text-kern">Aspirasi</a>
+              <a href="#departments" className="hover:text-black transition text-kern font-bold">Pilar</a>
+              <a href="#team" className="hover:text-black transition text-kern font-bold">Struktur</a>
+              <a href="#aspiration" className="hover:text-black transition text-kern font-bold">Aspirasi</a>
             </div>
             <button onClick={openMenu} className="flex flex-col gap-1.5 group">
               <div className="h-0.5 w-8 bg-black transition-all group-hover:w-10"></div>
@@ -194,8 +219,8 @@ export default function Home() {
 
       <section className="min-h-screen flex flex-col justify-center px-8 relative overflow-hidden">
         <div className="max-w-6xl mx-auto w-full pt-48 pb-20">
-          <h2 className="text-[11px] uppercase tracking-[0.6em] text-gray-600 mb-10 hero-reveal text-kern font-semibold">EST. 2026 / INSTITUSI ASPIRASI</h2>
-          <h1 className="text-6xl md:text-[4rem] font-medium tracking-tighter leading-[0.85] mb-16 hero-reveal">
+          <h2 className="text-[11px] uppercase tracking-[0.6em] text-gray-600 mb-10 hero-reveal text-kern font-bold">EST. 2026 / INSTITUSI ASPIRASI</h2>
+          <h1 className="text-6xl md:text-[4.5rem] font-bold tracking-tighter leading-[0.9] mb-16 hero-reveal">
             Masa Depan <br /> Bangsa Berawal <br /> dari <span className="italic text-gray-200">Gagasan.</span>
           </h1>
           <div className="flex flex-col md:flex-row md:items-start gap-12 hero-reveal">
@@ -212,8 +237,8 @@ export default function Home() {
       <section id="departments" className="py-40 bg-gray-50/20">
         <div className="max-w-5xl mx-auto px-8">
           <div className="mb-32">
-            <h2 className="text-[10px] uppercase tracking-[0.6em] text-gray-400 mb-6 text-kern">Pilar Strategis</h2>
-            <h3 className="text-5xl font-medium tracking-tight text-kern">Arsitektur Perubahan</h3>
+            <h2 className="text-[10px] uppercase tracking-[0.6em] text-gray-400 mb-6 text-kern font-bold">Pilar Strategis</h2>
+            <h3 className="text-5xl font-bold tracking-tight text-kern">Arsitektur Perubahan</h3>
           </div>
           <div className="relative">
             {Pillars.map((p, idx) => (
@@ -223,7 +248,7 @@ export default function Home() {
                     <div className="w-12 h-12 md:w-16 md:h-16 bg-gray-50 rounded-2xl flex items-center justify-center text-black shadow-sm">
                       <p.icon size={28} className="md:w-8 md:h-8" strokeWidth={1.5} />
                     </div>
-                    <h4 className="text-2xl md:text-5xl font-medium tracking-tight leading-tight">{p.title}</h4>
+                    <h4 className="text-2xl md:text-5xl font-bold tracking-tight leading-tight">{p.title}</h4>
                   </div>
                   <span className="text-[10px] md:text-xs font-bold text-gray-200 tracking-[0.5em]">{p.id}</span>
                 </div>
@@ -240,17 +265,17 @@ export default function Home() {
             <div className="text-center">
               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-8">Aspirasi Terkelola</span>
               <h3 className="text-7xl font-light tracking-tighter text-kern">{aspirationCount}</h3>
-              <p className="text-[10px] text-gray-300 mt-4 uppercase tracking-widest italic">+ Pembaruan Waktu Nyata</p>
+              <p className="text-[10px] text-gray-300 mt-4 uppercase tracking-widest italic font-bold">+ Pembaruan Waktu Nyata</p>
             </div>
             <div className="text-center md:border-x border-gray-100 px-10">
               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-8">Provinsi Dijangkau</span>
               <h3 className="text-7xl font-light tracking-tighter text-kern">38</h3>
-              <p className="text-[10px] text-gray-300 mt-4 uppercase tracking-widest italic">Cakupan Nasional</p>
+              <p className="text-[10px] text-gray-300 mt-4 uppercase tracking-widest italic font-bold">Cakupan Nasional</p>
             </div>
             <div className="text-center">
               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-8">Program Strategis</span>
               <h3 className="text-7xl font-light tracking-tighter text-kern">12</h3>
-              <p className="text-[10px] text-gray-300 mt-4 uppercase tracking-widest italic">Sasaran 2026</p>
+              <p className="text-[10px] text-gray-300 mt-4 uppercase tracking-widest italic font-bold">Sasaran 2026</p>
             </div>
           </div>
         </div>
@@ -260,8 +285,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8 text-kern">
             <div className="max-w-xl">
-              <h2 className="text-[10px] uppercase tracking-[0.8em] text-gray-400 mb-6">Kepemimpinan</h2>
-              <h3 className="text-5xl font-medium tracking-tighter">Dewan Strategis.</h3>
+              <h2 className="text-[10px] uppercase tracking-[0.8em] text-gray-400 mb-6 font-bold">Kepemimpinan</h2>
+              <h3 className="text-5xl font-bold tracking-tighter">Dewan Strategis.</h3>
             </div>
             <div className="flex space-x-4 mb-2">
               <button onClick={() => moveTeam(-1)} className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300">
@@ -274,19 +299,20 @@ export default function Home() {
           </div>
           <div className="team-slider-container">
             <div className="team-track" ref={teamTrackRef}>
-              {members?.map((member, idx) => (
+              {members?.map((member) => (
                 <div key={member.id} className="team-card group">
                   <img src={member.imageUrl} alt={member.fullName} />
                   <div className="team-arrow"><ArrowUpRight size={16} strokeWidth={2} /></div>
                   <div className="team-overlay">
-                    <h4 className="text-xl font-semibold">{member.fullName}</h4>
-                    <p className="text-[10px] uppercase tracking-widest opacity-70 mt-1">{member.position}</p>
-                    <p className="text-[8px] uppercase tracking-widest opacity-50 mt-1">{member.school}</p>
+                    <h4 className="text-xl font-bold">{member.fullName}</h4>
+                    <p className="text-[10px] uppercase tracking-widest opacity-70 mt-1 font-bold">{member.position}</p>
+                    <p className="text-[8px] uppercase tracking-widest opacity-50 mt-1 font-bold">{member.school}</p>
                   </div>
                 </div>
-              )) || (
+              ))}
+              {(!members || members.length === 0) && (
                 <div className="py-20 text-center w-full text-gray-300 font-light italic">
-                  Memuat data kepemimpinan...
+                  Belum ada data kepemimpinan yang ditambahkan.
                 </div>
               )}
             </div>
@@ -298,16 +324,21 @@ export default function Home() {
         <div id="gallery-horizontal">
           <div className="horizontal-sticky">
             <div className="horizontal-track" ref={horizontalTrackRef}>
-              <div className="flex flex-col justify-center min-w-[300px] mr-24">
-                <h2 className="text-[10px] uppercase tracking-[0.5em] text-gray-600 mb-8">Dokumentasi</h2>
-                <h3 className="text-5xl font-medium tracking-tighter leading-none text-white text-kern">Jejak Langkah Kolektif.</h3>
+              <div className="flex flex-col justify-center min-w-[350px] mr-24 px-8">
+                <h2 className="text-[10px] uppercase tracking-[0.5em] text-gray-600 mb-8 font-bold">Dokumentasi</h2>
+                <h3 className="text-5xl font-bold tracking-tighter leading-tight text-white text-kern">Jejak Langkah Kolektif.</h3>
+                <p className="text-gray-500 mt-6 font-light text-sm max-w-xs italic">Geser ke bawah untuk menjelajahi momen kegiatan kami.</p>
               </div>
               {gallery?.map((img) => (
                 <div key={img.id} className="horizontal-item">
-                  <img src={img.imageUrl} className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" alt={img.caption || 'Galeri'} />
+                  <img src={img.imageUrl} className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" alt={img.caption || 'Galeri Dokumentasi'} />
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <p className="text-[9px] uppercase tracking-[0.3em] text-white font-bold bg-black/40 backdrop-blur-md px-4 py-2 rounded-lg inline-block">{img.caption || 'Kegiatan DAGM'}</p>
+                  </div>
                 </div>
-              )) || (
-                <div className="flex items-center text-gray-800 italic">Memuat dokumentasi...</div>
+              ))}
+              {(!gallery || gallery.length === 0) && (
+                <div className="flex items-center text-gray-700 italic px-20">Belum ada dokumentasi kegiatan yang diunggah.</div>
               )}
             </div>
           </div>
@@ -320,7 +351,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-8">
           <div className="grid md:grid-cols-12 gap-16 mb-40">
             <div className="md:col-span-6">
-              <h2 className="text-4xl md:text-5xl font-medium tracking-tighter leading-tight mb-12 text-kern">Mari ciptakan dampak <br /> besar bersama DAGM.</h2>
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tighter leading-tight mb-12 text-kern">Mari ciptakan dampak <br /> besar bersama DAGM.</h2>
               <a href="mailto:sekretariat@dagm.org" className="flex items-center gap-6 group cursor-pointer w-fit">
                 <div className="w-16 h-16 rounded-full border border-gray-800 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-500">
                   <ArrowUpRight size={24} />
