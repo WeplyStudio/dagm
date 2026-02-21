@@ -25,6 +25,7 @@ import { collection, query, limit, orderBy } from 'firebase/firestore';
 
 export default function Home() {
   const [isAppLoading, setIsAppLoading] = useState(true);
+  const [progress, setProgress] = useState(0);
   const sideMenuRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
   const teamTrackRef = useRef<HTMLDivElement>(null);
@@ -45,13 +46,34 @@ export default function Home() {
 
   const aspirationCount = aspirations?.length || 0;
 
-  // Efek Pemuatan Utama
+  // Efek Pemuatan Persentase
   useEffect(() => {
-    if (!loadingAspirations && !loadingMembers && !loadingGallery) {
-      // Berikan jeda sedikit agar transisi terasa halus
+    let interval: NodeJS.Timeout;
+    
+    if (isAppLoading) {
+      interval = setInterval(() => {
+        setProgress((prev) => {
+          if (prev >= 99) {
+            // Jika data sudah selesai dimuat, langsung ke 100
+            if (!loadingAspirations && !loadingMembers && !loadingGallery) {
+              return 100;
+            }
+            return 99; // Tahan di 99 sampai data siap
+          }
+          return prev + 1;
+        });
+      }, 30);
+    }
+
+    return () => clearInterval(interval);
+  }, [isAppLoading, loadingAspirations, loadingMembers, loadingGallery]);
+
+  // Efek Transisi Selesai Muat
+  useEffect(() => {
+    if (progress === 100) {
       const timer = setTimeout(() => {
         const tl = gsap.timeline();
-        tl.to(".loader-text", { y: -20, opacity: 0, duration: 0.8, ease: "power4.in" });
+        tl.to(".loader-text", { y: -20, opacity: 0, duration: 0.6, ease: "power4.in" });
         tl.to(loaderRef.current, { 
           clipPath: "inset(0 0 100% 0)", 
           duration: 1.2, 
@@ -65,10 +87,10 @@ export default function Home() {
           stagger: 0.3, 
           ease: "power4.out" 
         }, "-=0.5");
-      }, 1500);
+      }, 500);
       return () => clearTimeout(timer);
     }
-  }, [loadingAspirations, loadingMembers, loadingGallery]);
+  }, [progress]);
 
   // Efek Cursor dan ScrollTrigger
   useEffect(() => {
@@ -196,21 +218,19 @@ export default function Home() {
 
   return (
     <div className="bg-white">
-      {/* Layar Pemuatan (Preloader) */}
+      {/* Layar Pemuatan (Persentase) */}
       <div 
         ref={loaderRef}
         className="fixed inset-0 z-[10000] bg-black flex flex-col items-center justify-center overflow-hidden"
         style={{ clipPath: "inset(0 0 0 0)" }}
       >
-        <div className="loader-text flex flex-col items-center gap-6">
-          <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center animate-pulse">
-            <span className="text-black font-black text-xl">D</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <h2 className="text-white text-[10px] font-bold tracking-[0.8em] uppercase mb-2">Memuat Pengalaman</h2>
-            <div className="w-48 h-[1px] bg-white/10 relative overflow-hidden">
-              <div className="absolute inset-0 bg-white/40 animate-[loading-bar_2s_infinite_ease-in-out]"></div>
-            </div>
+        <div className="loader-text flex flex-col items-center">
+          <h2 className="text-white text-7xl md:text-9xl font-black tracking-tighter mb-4 animate-in fade-in zoom-in duration-500">
+            {progress}%
+          </h2>
+          <div className="flex flex-col items-center opacity-40">
+            <h3 className="text-white text-[10px] font-bold tracking-[0.6em] uppercase text-kern">Inisialisasi Sistem</h3>
+            <p className="text-white/50 text-[8px] mt-2 uppercase tracking-[0.4em] font-medium">Dewan Aspirasi Generasi Muda</p>
           </div>
         </div>
       </div>
