@@ -32,8 +32,8 @@ export function AspirasiSection() {
     return (
       <section id="aspiration" className="py-40 bg-black text-white flex items-center justify-center">
         <div className="max-w-2xl px-6 text-center reveal-form">
-          <div className="w-20 h-20 bg-white text-black rounded-full flex items-center justify-center mx-auto mb-10">
-            <CheckCircle2 size={40} />
+          <div className="w-16 h-16 bg-white text-black rounded-full flex items-center justify-center mx-auto mb-10">
+            <CheckCircle2 size={32} />
           </div>
           <h3 className="text-4xl md:text-5xl font-medium tracking-tighter mb-6">Registrasi Berhasil</h3>
           <p className="text-gray-400 text-lg font-light leading-relaxed mb-12">
@@ -44,7 +44,7 @@ export function AspirasiSection() {
               setSubmitted(false);
               setAspiration('');
             }}
-            className="rounded-full bg-white text-black hover:bg-gray-200 px-10 py-6 text-[10px] uppercase tracking-[0.4em] font-bold h-auto"
+            className="rounded-full bg-white text-black hover:bg-gray-200 px-8 py-4 text-[10px] uppercase tracking-[0.4em] font-bold h-auto"
           >
             Ajukan Aspirasi Baru
           </Button>
@@ -100,7 +100,7 @@ export function AspirasiSection() {
             <Button 
               type="submit" 
               disabled={isSubmitting}
-              className="bg-white text-black px-12 py-6 rounded-full text-[10px] uppercase tracking-[0.4em] font-bold hover:invert transition-all duration-500 h-auto shadow-xl"
+              className="bg-white text-black px-8 py-4 rounded-full text-[10px] uppercase tracking-[0.4em] font-bold hover:invert transition-all duration-500 h-auto shadow-xl"
             >
               {isSubmitting ? <Loader2 className="animate-spin mr-2" /> : <Send className="mr-2" size={16} />}
               Hantar Aspirasi Sekarang
