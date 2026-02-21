@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
@@ -15,8 +14,7 @@ import {
   BookOpen,
   Megaphone,
   Users,
-  ShieldCheck,
-  Loader2
+  ShieldCheck
 } from "lucide-react";
 import { AspirasiSection } from "@/components/AspirasiSection";
 import { Toaster } from "@/components/ui/toaster";
@@ -62,7 +60,7 @@ export default function Home() {
           }
           return prev + 1;
         });
-      }, 30);
+      }, 20);
     }
 
     return () => clearInterval(interval);
@@ -73,7 +71,7 @@ export default function Home() {
     if (progress === 100) {
       const timer = setTimeout(() => {
         const tl = gsap.timeline();
-        tl.to(".loader-text", { y: -20, opacity: 0, duration: 0.6, ease: "power4.in" });
+        tl.to(".loader-percentage", { y: -20, opacity: 0, duration: 0.6, ease: "power4.in" });
         tl.to(loaderRef.current, { 
           clipPath: "inset(0 0 100% 0)", 
           duration: 1.2, 
@@ -218,20 +216,16 @@ export default function Home() {
 
   return (
     <div className="bg-white">
-      {/* Layar Pemuatan (Persentase) */}
+      {/* Layar Pemuatan (Hanya Persentase) */}
       <div 
         ref={loaderRef}
-        className="fixed inset-0 z-[10000] bg-black flex flex-col items-center justify-center overflow-hidden"
+        className="fixed inset-0 z-[10000] bg-black flex items-center justify-center overflow-hidden"
         style={{ clipPath: "inset(0 0 0 0)" }}
       >
-        <div className="loader-text flex flex-col items-center">
-          <h2 className="text-white text-7xl md:text-9xl font-black tracking-tighter mb-4 animate-in fade-in zoom-in duration-500">
+        <div className="loader-percentage">
+          <h2 className="text-white text-8xl md:text-[12rem] font-black tracking-tighter animate-in fade-in zoom-in duration-500">
             {progress}%
           </h2>
-          <div className="flex flex-col items-center opacity-40">
-            <h3 className="text-white text-[10px] font-bold tracking-[0.6em] uppercase text-kern">Inisialisasi Sistem</h3>
-            <p className="text-white/50 text-[8px] mt-2 uppercase tracking-[0.4em] font-medium">Dewan Aspirasi Generasi Muda</p>
-          </div>
         </div>
       </div>
 
@@ -451,13 +445,6 @@ export default function Home() {
       </footer>
 
       <Toaster />
-
-      <style jsx global>{`
-        @keyframes loading-bar {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-      `}</style>
     </div>
   );
 }
