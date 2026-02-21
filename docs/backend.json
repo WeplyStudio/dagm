@@ -1,0 +1,428 @@
+{
+  "entities": {
+    "Aspirasi": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Aspirasi",
+      "type": "object",
+      "description": "Represents a submitted aspiration or issue from a user to the Dewan Aspirasi Generasi Muda (DAGM).",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Aspirasi entity."
+        },
+        "submissionCode": {
+          "type": "string",
+          "description": "A unique code assigned to the aspiration for the submitter to track its status."
+        },
+        "title": {
+          "type": "string",
+          "description": "The concise title or subject of the aspiration."
+        },
+        "content": {
+          "type": "string",
+          "description": "The full detailed text of the aspiration submitted by the user."
+        },
+        "summary": {
+          "type": "string",
+          "description": "A GenAI-generated summary of the aspiration's content, making it quicker for council members to review."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the aspiration (e.g., 'Pending', 'Read', 'In Progress', 'Resolved', 'Archived')."
+        },
+        "submittedAt": {
+          "type": "string",
+          "description": "The timestamp when the aspiration was submitted.",
+          "format": "date-time"
+        },
+        "submitterName": {
+          "type": "string",
+          "description": "The name of the individual or group submitting the aspiration."
+        },
+        "submitterEmail": {
+          "type": "string",
+          "description": "The email address of the submitter for follow-up.",
+          "format": "email"
+        },
+        "category": {
+          "type": "string",
+          "description": "The category or topic of the aspiration (e.g., 'Education', 'Environment', 'Infrastructure')."
+        }
+      },
+      "required": [
+        "id",
+        "submissionCode",
+        "title",
+        "content",
+        "status",
+        "submittedAt",
+        "submitterName",
+        "submitterEmail",
+        "category"
+      ]
+    },
+    "Event": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Event",
+      "type": "object",
+      "description": "Represents an upcoming or past legislative event or meeting organized by DAGM.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Event entity."
+        },
+        "title": {
+          "type": "string",
+          "description": "The official title of the event (e.g., 'DAGM Youth Legislative Summit')."
+        },
+        "description": {
+          "type": "string",
+          "description": "A detailed description of the event, its purpose, and agenda."
+        },
+        "date": {
+          "type": "string",
+          "description": "The date and time when the event is scheduled to occur.",
+          "format": "date-time"
+        },
+        "location": {
+          "type": "string",
+          "description": "The physical or virtual location where the event will be held."
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "URL to the main image or banner for the event.",
+          "format": "uri"
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the event (e.g., 'Upcoming', 'Active', 'Completed', 'Cancelled')."
+        },
+        "attendeeCount": {
+          "type": "number",
+          "description": "The number of expected or actual participants for the event."
+        },
+        "isFeatured": {
+          "type": "boolean",
+          "description": "Indicates if the event should be prominently displayed as a featured agenda."
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "date",
+        "location",
+        "imageUrl",
+        "status",
+        "isFeatured"
+      ]
+    },
+    "Program": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Program",
+      "type": "object",
+      "description": "Defines a specific program or initiative offered by DAGM, such as 'Jaring Asmara' or 'Parlemen Sekolah'.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Program entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "The official name of the program (e.g., 'Jaring Asmara')."
+        },
+        "description": {
+          "type": "string",
+          "description": "A detailed explanation of the program's objectives and activities."
+        },
+        "iconClass": {
+          "type": "string",
+          "description": "The CSS class name for the Phosphor icon representing the program in the UI (e.g., 'ph-fill ph-chats-circle')."
+        },
+        "iconBgColor": {
+          "type": "string",
+          "description": "The background color (e.g., hex code or Tailwind class) for the program's icon in the UI."
+        },
+        "accentColor": {
+          "type": "string",
+          "description": "The accent color (e.g., hex code or Tailwind class) associated with the program for UI styling."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description",
+        "iconClass",
+        "iconBgColor",
+        "accentColor"
+      ]
+    },
+    "Member": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Member",
+      "type": "object",
+      "description": "Represents a member of the Dewan Aspirasi Generasi Muda (DAGM) with their profile details.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Member entity."
+        },
+        "fullName": {
+          "type": "string",
+          "description": "The full name of the council member."
+        },
+        "position": {
+          "type": "string",
+          "description": "The official role or position of the member within the council (e.g., 'Ketua Dewan', 'Sekretaris Jenderal')."
+        },
+        "school": {
+          "type": "string",
+          "description": "The name of the school the member represents or attends."
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "URL to the member's profile image.",
+          "format": "uri"
+        },
+        "positionColor": {
+          "type": "string",
+          "description": "The accent color (e.g., hex code or Tailwind class) associated with the member's position for UI styling."
+        }
+      },
+      "required": [
+        "id",
+        "fullName",
+        "position",
+        "school",
+        "imageUrl",
+        "positionColor"
+      ]
+    },
+    "Article": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Article",
+      "type": "object",
+      "description": "Represents a news article, blog post, or official statement published by DAGM.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the Article entity."
+        },
+        "title": {
+          "type": "string",
+          "description": "The main title of the article or news piece."
+        },
+        "content": {
+          "type": "string",
+          "description": "The full content of the article, typically in Markdown or HTML format."
+        },
+        "summary": {
+          "type": "string",
+          "description": "A brief summary or excerpt of the article for display in listings."
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "URL to the main featured image for the article.",
+          "format": "uri"
+        },
+        "publishedAt": {
+          "type": "string",
+          "description": "The date and time when the article was published.",
+          "format": "date-time"
+        },
+        "authorName": {
+          "type": "string",
+          "description": "The name of the author or publishing entity of the article."
+        },
+        "category": {
+          "type": "string",
+          "description": "The category of the article (e.g., 'Kegiatan', 'Opini', 'Rilis', 'Berita')."
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "content",
+        "summary",
+        "imageUrl",
+        "publishedAt",
+        "authorName",
+        "category"
+      ]
+    },
+    "AdminUser": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "AdminUser",
+      "type": "object",
+      "description": "Represents an administrative user with access to the backend dashboard.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the AdminUser entity."
+        },
+        "username": {
+          "type": "string",
+          "description": "The username for administrative access. Password authentication is handled by an external system to ensure security."
+        }
+      },
+      "required": [
+        "id",
+        "username"
+      ]
+    },
+    "GalleryImage": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "GalleryImage",
+      "type": "object",
+      "description": "Represents an image intended for a general gallery section, manageable from the admin dashboard.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the GalleryImage entity."
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "URL to the gallery image.",
+          "format": "uri"
+        },
+        "caption": {
+          "type": "string",
+          "description": "A short description or caption for the image."
+        },
+        "uploadedAt": {
+          "type": "string",
+          "description": "The timestamp when the image was uploaded.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "imageUrl",
+        "uploadedAt"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/aspirations/{submissionCode}",
+        "definition": {
+          "entityName": "Aspirasi",
+          "schema": {
+            "$ref": "#/backend/entities/Aspirasi"
+          },
+          "description": "Stores user-submitted aspirations. The document ID corresponds to the `submissionCode` for easy public retrieval. Includes denormalized 'status' for tracking. Public users can get a specific aspiration by its code; admin users can list, get, create, update, and delete all aspirations.",
+          "params": [
+            {
+              "name": "submissionCode",
+              "description": "The unique tracking code for an aspiration, also serving as the document ID."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/events/{eventId}",
+        "definition": {
+          "entityName": "Event",
+          "schema": {
+            "$ref": "#/backend/entities/Event"
+          },
+          "description": "Manages details of DAGM's legislative events and meetings. Publicly readable (list and get), only accessible for creation/update/deletion by administrators.",
+          "params": [
+            {
+              "name": "eventId",
+              "description": "Unique identifier for the event."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/programs/{programId}",
+        "definition": {
+          "entityName": "Program",
+          "schema": {
+            "$ref": "#/backend/entities/Program"
+          },
+          "description": "Lists DAGM's official programs and initiatives. Publicly readable (list and get), only accessible for creation/update/deletion by administrators.",
+          "params": [
+            {
+              "name": "programId",
+              "description": "Unique identifier for the program."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/members/{memberId}",
+        "definition": {
+          "entityName": "Member",
+          "schema": {
+            "$ref": "#/backend/entities/Member"
+          },
+          "description": "Contains profiles of DAGM council members ('our team'). Publicly readable (list and get), with administrators having full CRUD access to manage members and update their images.",
+          "params": [
+            {
+              "name": "memberId",
+              "description": "Unique identifier for the council member."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/articles/{articleId}",
+        "definition": {
+          "entityName": "Article",
+          "schema": {
+            "$ref": "#/backend/entities/Article"
+          },
+          "description": "Stores news articles, blog posts, and official statements. Publicly readable (list and get), only accessible for creation/update/deletion by administrators.",
+          "params": [
+            {
+              "name": "articleId",
+              "description": "Unique identifier for the article."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/admin_roles/{adminUid}",
+        "definition": {
+          "entityName": "AdminUser",
+          "schema": {
+            "$ref": "#/backend/entities/AdminUser"
+          },
+          "description": "Used for Database Access Control (DBAC). The existence of a document here, where `adminUid` matches `request.auth.uid`, grants administrative privileges. Only authenticated admins can read and manage these roles.",
+          "params": [
+            {
+              "name": "adminUid",
+              "description": "The Firebase Authentication UID of an administrative user."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/gallery_images/{imageId}",
+        "definition": {
+          "entityName": "GalleryImage",
+          "schema": {
+            "$ref": "#/backend/entities/GalleryImage"
+          },
+          "description": "Stores images for the public gallery. Publicly readable (list and get), with administrators having full CRUD access to manage gallery content.",
+          "params": [
+            {
+              "name": "imageId",
+              "description": "Unique identifier for the gallery image."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The Firestore structure is designed to be secure, scalable, and easily debuggable, prioritizing Authorization Independence and efficient querying (QAPs). Each top-level collection represents a distinct entity, ensuring Structural Segregation and homogenous security postures. For most public-facing content like Events, Programs, Members, Articles, and Gallery Images, a simple public-read and admin-write model is applied, allowing anonymous users to retrieve lists and specific documents, while only authenticated administrators can modify them. Administrative roles are implemented using a Database Access Control (DBAC) pattern, where the presence of a user's UID in the `/admin_roles` collection grants elevated privileges. This eliminates the need for custom claims and centralizes role management within Firestore itself. All authorization logic relies solely on `request.auth.uid` for admin access, and on document data (e.g., `submissionCode` for Aspirations) for public lookups, thus achieving Authorization Independence by avoiding `get()` calls on parent documents in security rules. Data clarity is maintained through descriptive path parameters and explicit state modeling (e.g., `status` fields).\n\n**Authorization Independence:** Achieved by ensuring that no document's access control is determined by data fetched from another document or its parent collection in a way that would require `get()` calls in security rules. For example, a user checking their aspiration status only needs the `submissionCode` which is part of the aspiration document itself. Admin access is determined by checking the `/admin_roles` collection, a direct check against `request.auth.uid`, not a hierarchical dependency.\n\n**QAPs (Rules are not Filters):**\n1.  **Public Content (Events, Programs, Members, Articles, Gallery Images):** These collections are configured for public `list` and `get` operations. Security rules will simply allow `read` for all users (`request.auth != null || true`), ensuring that `list` operations are not filtered by rules. This is highly efficient as the database can directly serve the requested data.\n2.  **Aspirations:** To allow users to check their aspiration status using a `submissionCode` without exposing all aspirations to `list` queries from non-admins, the `submissionCode` is used as the document ID in the `/aspirations` collection. This enables a secure and direct `get` operation (e.g., `firestore.collection('aspirations').doc(submissionCode).get()`) for specific aspirations by public users. Admin users, however, will have `list` and `get` access to all aspirations. This adheres to QAPs by providing distinct, direct access patterns for different user types without rules filtering `list` results for public users. \n3.  **Admin Roles:** Access to admin-specific functions and data is determined by a direct `get` check on the `/admin_roles/{adminUid}` collection. This is a clear existence check and not a filtering operation on large datasets."
+  }
+}
