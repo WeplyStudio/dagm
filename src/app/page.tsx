@@ -15,7 +15,8 @@ import {
   BookOpen,
   Megaphone,
   Users,
-  ShieldCheck
+  ShieldCheck,
+  Loader2
 } from "lucide-react";
 import { AspirasiSection } from "@/components/AspirasiSection";
 import { Toaster } from "@/components/ui/toaster";
@@ -23,10 +24,12 @@ import { useFirestore, useCollection, useMemoFirebase } from '@/firebase';
 import { collection, query, limit, orderBy } from 'firebase/firestore';
 
 export default function Home() {
+  const [isAppLoading, setIsAppLoading] = useState(true);
   const sideMenuRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
   const teamTrackRef = useRef<HTMLDivElement>(null);
   const horizontalTrackRef = useRef<HTMLDivElement>(null);
+  const loaderRef = useRef<HTMLDivElement>(null);
   const [teamIndex, setTeamIndex] = useState(0);
 
   const db = useFirestore();
@@ -36,14 +39,41 @@ export default function Home() {
   const membersQuery = useMemoFirebase(() => query(collection(db, 'members')), [db]);
   const galleryQuery = useMemoFirebase(() => query(collection(db, 'gallery_images'), orderBy('uploadedAt', 'desc'), limit(10)), [db]);
 
-  const { data: aspirations } = useCollection(aspirationsQuery);
-  const { data: members } = useCollection(membersQuery);
-  const { data: gallery } = useCollection(galleryQuery);
+  const { data: aspirations, isLoading: loadingAspirations } = useCollection(aspirationsQuery);
+  const { data: members, isLoading: loadingMembers } = useCollection(membersQuery);
+  const { data: gallery, isLoading: loadingGallery } = useCollection(galleryQuery);
 
   const aspirationCount = aspirations?.length || 0;
 
-  // Efek Cursor dan Reveal Hero
+  // Efek Pemuatan Utama
   useEffect(() => {
+    if (!loadingAspirations && !loadingMembers && !loadingGallery) {
+      // Berikan jeda sedikit agar transisi terasa halus
+      const timer = setTimeout(() => {
+        const tl = gsap.timeline();
+        tl.to(".loader-text", { y: -20, opacity: 0, duration: 0.8, ease: "power4.in" });
+        tl.to(loaderRef.current, { 
+          clipPath: "inset(0 0 100% 0)", 
+          duration: 1.2, 
+          ease: "expo.inOut",
+          onComplete: () => setIsAppLoading(false)
+        }, "-=0.2");
+        tl.from(".hero-reveal", { 
+          y: 40, 
+          opacity: 0, 
+          duration: 1.5, 
+          stagger: 0.3, 
+          ease: "power4.out" 
+        }, "-=0.5");
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [loadingAspirations, loadingMembers, loadingGallery]);
+
+  // Efek Cursor dan ScrollTrigger
+  useEffect(() => {
+    if (isAppLoading) return;
+
     gsap.registerPlugin(ScrollTrigger);
 
     const cursor = cursorRef.current;
@@ -59,14 +89,6 @@ export default function Home() {
         el.addEventListener('mouseleave', () => gsap.to(cursor, { scale: 1, backgroundColor: 'black' }));
       });
     }
-
-    gsap.from(".hero-reveal", { 
-      y: 40, 
-      opacity: 0, 
-      duration: 1.5, 
-      stagger: 0.3, 
-      ease: "power4.out" 
-    });
 
     const stackItems = gsap.utils.toArray(".stack-item");
     stackItems.forEach((card: any, i, arr) => {
@@ -88,13 +110,12 @@ export default function Home() {
     return () => {
       ScrollTrigger.getAll().forEach(t => t.kill());
     };
-  }, []);
+  }, [isAppLoading]);
 
-  // Efek Khusus untuk Galeri Horizontal (Menunggu Data)
+  // Efek Galeri Horizontal
   useEffect(() => {
-    if (!gallery || gallery.length === 0 || !horizontalTrackRef.current) return;
+    if (isAppLoading || !gallery || gallery.length === 0 || !horizontalTrackRef.current) return;
 
-    // Refresh ScrollTrigger agar menghitung ulang lebar kontainer yang baru dimuat
     ScrollTrigger.refresh();
 
     const track = horizontalTrackRef.current;
@@ -116,18 +137,18 @@ export default function Home() {
       animation.scrollTrigger?.kill();
       animation.kill();
     };
-  }, [gallery]);
+  }, [isAppLoading, gallery]);
 
-  // Efek Auto-Slide untuk Slider Tim
+  // Efek Auto-Slide Tim
   useEffect(() => {
-    if (!members || members.length <= 1) return;
+    if (isAppLoading || !members || members.length <= 1) return;
 
     const interval = setInterval(() => {
       moveTeam(1);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [members]);
+  }, [isAppLoading, members]);
 
   const openMenu = () => {
     const tl = gsap.timeline();
@@ -175,6 +196,25 @@ export default function Home() {
 
   return (
     <div className="bg-white">
+      {/* Layar Pemuatan (Preloader) */}
+      <div 
+        ref={loaderRef}
+        className="fixed inset-0 z-[10000] bg-black flex flex-col items-center justify-center overflow-hidden"
+        style={{ clipPath: "inset(0 0 0 0)" }}
+      >
+        <div className="loader-text flex flex-col items-center gap-6">
+          <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center animate-pulse">
+            <span className="text-black font-black text-xl">D</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <h2 className="text-white text-[10px] font-bold tracking-[0.8em] uppercase mb-2">Memuat Pengalaman</h2>
+            <div className="w-48 h-[1px] bg-white/10 relative overflow-hidden">
+              <div className="absolute inset-0 bg-white/40 animate-[loading-bar_2s_infinite_ease-in-out]"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div id="cursor" ref={cursorRef} className="hidden lg:block"></div>
 
       <div id="side-menu" ref={sideMenuRef}>
@@ -391,6 +431,13 @@ export default function Home() {
       </footer>
 
       <Toaster />
+
+      <style jsx global>{`
+        @keyframes loading-bar {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+      `}</style>
     </div>
   );
 }
