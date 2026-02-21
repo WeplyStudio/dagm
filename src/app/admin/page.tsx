@@ -24,7 +24,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 
 export default function AdminDashboard() {
   const router = useRouter();
@@ -125,6 +125,10 @@ export default function AdminDashboard() {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="p-0 w-72">
+              <div className="sr-only">
+                <SheetTitle>Menu Navigasi Admin</SheetTitle>
+                <SheetDescription>Akses ke berbagai modul pengelolaan konten dan aspirasi dewan.</SheetDescription>
+              </div>
               <SidebarNav />
             </SheetContent>
           </Sheet>
