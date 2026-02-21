@@ -269,7 +269,7 @@ export default function Home() {
             <div className="text-center md:border-x border-gray-100 px-10">
               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-8">Provinsi Dijangkau</span>
               <h3 className="text-7xl font-light tracking-tighter counter text-kern" data-target="38">0</h3>
-              <p className="text-[10px] text-gray-300 mt-4 uppercase tracking-widest italic">Liputan Nasional</p>
+              <p className="text-[10px] text-gray-300 mt-4 uppercase tracking-widest italic">Cakupan Nasional</p>
             </div>
             <div className="text-center">
               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-8">Program Strategis</span>
@@ -314,14 +314,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* JEJAK LANGKAH (HORIZONTAL) */}
-      <section id="gallery" className="py-20 border-t border-gray-100 bg-white">
+      {/* JEJAK LANGKAH (HORIZONTAL) - BLACK BG */}
+      <section id="gallery" className="py-20 bg-[#0a0a0a] border-t border-gray-900">
         <div id="gallery-horizontal">
           <div className="horizontal-sticky">
             <div className="horizontal-track" ref={horizontalTrackRef}>
               <div className="flex flex-col justify-center min-w-[300px] mr-24">
-                <h2 className="text-[10px] uppercase tracking-[0.5em] text-gray-400 mb-8">Dokumentasi</h2>
-                <h3 className="text-5xl font-medium tracking-tighter leading-none text-kern">Jejak Langkah Kolektif.</h3>
+                <h2 className="text-[10px] uppercase tracking-[0.5em] text-gray-600 mb-8">Dokumentasi</h2>
+                <h3 className="text-5xl font-medium tracking-tighter leading-none text-white text-kern">Jejak Langkah Kolektif.</h3>
               </div>
               <div className="horizontal-item"><img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1200" className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" alt="Gallery 1" /></div>
               <div className="horizontal-item"><img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=1200" className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" alt="Gallery 2" /></div>
@@ -333,7 +333,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ASPIRASI SECTION */}
+      {/* ASPIRASI SECTION - WHITE BG */}
       <AspirasiSection />
 
       {/* FOOTER */}

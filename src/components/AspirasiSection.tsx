@@ -29,13 +29,13 @@ export function AspirasiSection() {
 
   if (submitted) {
     return (
-      <section id="aspiration" className="py-40 bg-black text-white flex items-center justify-center">
+      <section id="aspiration" className="py-40 bg-white text-black flex items-center justify-center">
         <div className="max-w-2xl px-6 text-center reveal-form">
-          <div className="w-16 h-16 bg-white text-black rounded-full flex items-center justify-center mx-auto mb-10">
+          <div className="w-16 h-16 bg-black text-white rounded-full flex items-center justify-center mx-auto mb-10">
             <CheckCircle2 size={32} />
           </div>
           <h3 className="text-4xl md:text-5xl font-medium tracking-tighter mb-6">Registrasi Berhasil</h3>
-          <p className="text-gray-400 text-lg font-light leading-relaxed mb-12">
+          <p className="text-gray-500 text-lg font-light leading-relaxed mb-12">
             Kontribusi pemikiran Anda telah tercatat secara resmi sebagai bagian dari pangkalan data aspirasi strategis nasional.
           </p>
           <Button 
@@ -43,7 +43,7 @@ export function AspirasiSection() {
               setSubmitted(false);
               setAspiration('');
             }}
-            className="rounded-full bg-white text-black hover:bg-gray-200 px-8 py-4 text-[10px] uppercase tracking-[0.4em] font-bold h-auto"
+            className="rounded-full bg-black text-white hover:bg-gray-800 px-8 py-4 text-[10px] uppercase tracking-[0.4em] font-bold h-auto"
           >
             Ajukan Aspirasi Baru
           </Button>
@@ -53,41 +53,41 @@ export function AspirasiSection() {
   }
 
   return (
-    <section id="aspiration" className="py-40 bg-black text-white">
+    <section id="aspiration" className="py-40 bg-white text-black">
       <div className="max-w-4xl mx-auto px-8">
         <div className="mb-32 text-center reveal-form">
-          <h2 className="text-[10px] uppercase tracking-[1.2em] text-gray-700 mb-10 font-bold">Ruang Partisipasi</h2>
+          <h2 className="text-[10px] uppercase tracking-[1.2em] text-gray-400 mb-10 font-bold">Ruang Partisipasi</h2>
           <h3 className="text-6xl font-light tracking-tighter leading-none text-kern">Sampaikan <br /> Aspirasi Anda.</h3>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-16 reveal-form">
           <div className="grid md:grid-cols-2 gap-20">
-            <div className="border-b border-gray-800 py-6 focus-within:border-white transition-all duration-300">
-              <Label htmlFor="name" className="text-[10px] uppercase font-bold text-gray-500 block mb-4 tracking-widest">Nama Lengkap</Label>
+            <div className="border-b border-gray-100 py-6 focus-within:border-black transition-all duration-300">
+              <Label htmlFor="name" className="text-[10px] uppercase font-bold text-gray-400 block mb-4 tracking-widest">Nama Lengkap</Label>
               <Input 
                 id="name" 
-                className="w-full bg-transparent border-none outline-none text-2xl font-light p-0 h-auto placeholder:text-gray-800 text-white focus-visible:ring-0" 
+                className="w-full bg-transparent border-none outline-none text-2xl font-light p-0 h-auto placeholder:text-gray-200 text-black focus-visible:ring-0" 
                 placeholder="Identitas Resmi" 
                 required 
               />
             </div>
-            <div className="border-b border-gray-800 py-6 focus-within:border-white transition-all duration-300">
-              <Label htmlFor="email" className="text-[10px] uppercase font-bold text-gray-500 block mb-4 tracking-widest">Alamat Surel</Label>
+            <div className="border-b border-gray-100 py-6 focus-within:border-black transition-all duration-300">
+              <Label htmlFor="email" className="text-[10px] uppercase font-bold text-gray-400 block mb-4 tracking-widest">Alamat Surel</Label>
               <Input 
                 id="email" 
                 type="email"
-                className="w-full bg-transparent border-none outline-none text-2xl font-light p-0 h-auto placeholder:text-gray-800 text-white focus-visible:ring-0" 
+                className="w-full bg-transparent border-none outline-none text-2xl font-light p-0 h-auto placeholder:text-gray-200 text-black focus-visible:ring-0" 
                 placeholder="nama@institusi.com" 
                 required 
               />
             </div>
           </div>
 
-          <div className="border-b border-gray-800 py-6 focus-within:border-white transition-all duration-300">
-            <Label htmlFor="aspiration" className="text-[10px] uppercase font-bold text-gray-500 block mb-4 tracking-widest">Pesan Aspirasi</Label>
+          <div className="border-b border-gray-100 py-6 focus-within:border-black transition-all duration-300">
+            <Label htmlFor="aspiration" className="text-[10px] uppercase font-bold text-gray-400 block mb-4 tracking-widest">Pesan Aspirasi</Label>
             <Textarea 
               id="aspiration" 
-              className="w-full bg-transparent border-none outline-none text-2xl font-light min-h-[160px] p-0 resize-none placeholder:text-gray-800 text-white focus-visible:ring-0" 
+              className="w-full bg-transparent border-none outline-none text-2xl font-light min-h-[160px] p-0 resize-none placeholder:text-gray-200 text-black focus-visible:ring-0" 
               placeholder="Uraikan gagasan atau rekomendasi Anda untuk bangsa..." 
               value={aspiration}
               onChange={(e) => setAspiration(e.target.value)}
@@ -99,7 +99,7 @@ export function AspirasiSection() {
             <Button 
               type="submit" 
               disabled={isSubmitting}
-              className="bg-white text-black px-8 py-4 rounded-full text-[10px] uppercase tracking-[0.4em] font-bold hover:invert transition-all duration-500 h-auto shadow-xl"
+              className="bg-black text-white px-8 py-4 rounded-full text-[10px] uppercase tracking-[0.4em] font-bold hover:bg-gray-800 transition-all duration-500 h-auto shadow-xl"
             >
               {isSubmitting ? <Loader2 className="animate-spin mr-2" /> : <Send className="mr-2" size={16} />}
               Kirim Aspirasi Sekarang

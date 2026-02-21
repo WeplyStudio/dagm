@@ -90,7 +90,7 @@
 
 /* Horizontal Gallery */
 #gallery-horizontal {
-  background: #fff;
+  background: #0a0a0a;
   overflow: hidden;
 }
 .horizontal-sticky {
@@ -108,7 +108,7 @@
   flex-shrink: 0;
   width: 80vw;
   height: 60vh;
-  background: #f4f4f4;
+  background: #1a1a1a;
   overflow: hidden;
   border-radius: 0.5rem;
 }
