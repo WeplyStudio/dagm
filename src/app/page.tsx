@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useEffect, useRef } from 'react';
@@ -18,6 +19,8 @@ import {
 } from "lucide-react";
 import { AspirasiSection } from "@/components/AspirasiSection";
 import { Toaster } from "@/components/ui/toaster";
+import { useFirestore, useCollection, useMemoFirebase } from '@/firebase';
+import { collection, query, limit } from 'firebase/firestore';
 
 export default function Home() {
   const sideMenuRef = useRef<HTMLDivElement>(null);
@@ -25,10 +28,22 @@ export default function Home() {
   const teamTrackRef = useRef<HTMLDivElement>(null);
   const horizontalTrackRef = useRef<HTMLDivElement>(null);
 
+  const db = useFirestore();
+
+  // Fetch real data
+  const aspirationsQuery = useMemoFirebase(() => query(collection(db, 'aspirations')), [db]);
+  const membersQuery = useMemoFirebase(() => query(collection(db, 'members')), [db]);
+  const galleryQuery = useMemoFirebase(() => query(collection(db, 'gallery_images'), limit(6)), [db]);
+
+  const { data: aspirations } = useCollection(aspirationsQuery);
+  const { data: members } = useCollection(membersQuery);
+  const { data: gallery } = useCollection(galleryQuery);
+
+  const aspirationCount = aspirations?.length || 0;
+
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Kursor Kustom
     const cursor = cursorRef.current;
     if (cursor) {
       const onMouseMove = (e: MouseEvent) => {
@@ -43,7 +58,6 @@ export default function Home() {
       });
     }
 
-    // Animasi Hero
     gsap.from(".hero-reveal", { 
       y: 40, 
       opacity: 0, 
@@ -52,7 +66,6 @@ export default function Home() {
       ease: "power4.out" 
     });
 
-    // Logika Kartu Bertumpuk (Stacked Cards)
     const stackItems = gsap.utils.toArray(".stack-item");
     stackItems.forEach((card: any, i, arr) => {
       if (i !== arr.length - 1) {
@@ -70,7 +83,6 @@ export default function Home() {
       }
     });
 
-    // Galeri Gulir Horizontal
     if (horizontalTrackRef.current) {
       const track = horizontalTrackRef.current;
       gsap.to(track, {
@@ -87,33 +99,6 @@ export default function Home() {
         }
       });
     }
-
-    // Penghitung Statistik
-    const counters = document.querySelectorAll('.counter');
-    counters.forEach(counter => {
-      const target = +(counter.getAttribute('data-target') || 0);
-      gsap.to(counter, {
-        innerText: target,
-        duration: 2,
-        snap: { innerText: 1 },
-        scrollTrigger: {
-          trigger: counter,
-          start: "top 85%"
-        }
-      });
-    });
-
-    // Pendedahan Formulir
-    gsap.from(".reveal-form", {
-      y: 50,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.2,
-      scrollTrigger: {
-        trigger: "#aspiration",
-        start: "top 60%"
-      }
-    });
 
     return () => {
       ScrollTrigger.getAll().forEach(t => t.kill());
@@ -137,11 +122,14 @@ export default function Home() {
   const moveTeam = (dir: number) => {
     if (!teamTrackRef.current) return;
     const cards = teamTrackRef.current.children.length;
+    if (cards === 0) return;
     const visibleCards = window.innerWidth >= 768 ? 3 : 1;
-    const maxIndex = cards - visibleCards;
+    const maxIndex = Math.max(0, cards - visibleCards);
     
     let currentX = gsap.getProperty(teamTrackRef.current, "x") as number;
-    const cardWidth = (teamTrackRef.current.children[0] as HTMLElement).offsetWidth + 24;
+    const cardElement = teamTrackRef.current.children[0] as HTMLElement;
+    if (!cardElement) return;
+    const cardWidth = cardElement.offsetWidth + 24;
     
     let newIndex = Math.round(-currentX / cardWidth) + dir;
     if (newIndex < 0) newIndex = maxIndex;
@@ -160,19 +148,10 @@ export default function Home() {
     { id: "HQ", title: "Sekretariat Jenderal", desc: "Pusat kendali administrasi dan koordinasi lintas departemen untuk sinkronisasi program kerja.", icon: ShieldCheck }
   ];
 
-  const Team = [
-    { name: "Alexandros V.", role: "Pendiri", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800" },
-    { name: "David Gilmore", role: "Ketua Umum", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800" },
-    { name: "Gerard White", role: "Wakil Ketua", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800" },
-    { name: "Elena R.", role: "Sekretaris I", img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800" },
-    { name: "Marcus A.", role: "Bendahara I", img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800" }
-  ];
-
   return (
     <div className="bg-white">
       <div id="cursor" ref={cursorRef} className="hidden lg:block"></div>
 
-      {/* TAMPILAN MENU SAMPING */}
       <div id="side-menu" ref={sideMenuRef}>
         <button onClick={closeMenu} className="absolute top-10 right-10 text-white group flex flex-col items-end">
           <div className="text-[10px] uppercase tracking-[0.4em] mb-2 opacity-50 group-hover:opacity-100 transition-opacity">Tutup</div>
@@ -184,13 +163,13 @@ export default function Home() {
           <a href="#gallery" onClick={closeMenu} className="menu-link">Jejak</a>
           <a href="#aspiration" onClick={closeMenu} className="menu-link">Aspirasi</a>
           <a href="mailto:sekretariat@dagm.org" onClick={closeMenu} className="menu-link">Hubungi</a>
+          <a href="/admin" onClick={closeMenu} className="menu-link text-gray-600">Admin</a>
         </div>
         <div className="mt-20 flex gap-10 text-white opacity-30 text-[10px] uppercase tracking-[0.5em]">
           <span>Instagram</span><span>LinkedIn</span><span>Twitter</span>
         </div>
       </div>
 
-      {/* NAVIGASI UTAMA */}
       <nav className="fixed w-full z-[100] bg-white/80 backdrop-blur-xl border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-8 h-24 flex items-center justify-between">
           <a href="#" className="flex items-center">
@@ -213,7 +192,6 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* BAGIAN HERO */}
       <section className="min-h-screen flex flex-col justify-center px-8 relative overflow-hidden">
         <div className="max-w-6xl mx-auto w-full pt-48 pb-20">
           <h2 className="text-[11px] uppercase tracking-[0.6em] text-gray-600 mb-10 hero-reveal text-kern font-semibold">EST. 2026 / INSTITUSI ASPIRASI</h2>
@@ -231,7 +209,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PILAR BERTUMPUK (STACKED PILLARS) */}
       <section id="departments" className="py-40 bg-gray-50/20">
         <div className="max-w-5xl mx-auto px-8">
           <div className="mb-32">
@@ -257,30 +234,28 @@ export default function Home() {
         </div>
       </section>
 
-      {/* STATISTIK DAMPAK */}
       <section className="py-40 bg-white">
         <div className="max-w-7xl mx-auto px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-20 border-y border-gray-100 py-32">
             <div className="text-center">
               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-8">Aspirasi Terkelola</span>
-              <h3 className="text-7xl font-light tracking-tighter counter text-kern" data-target="1500">0</h3>
+              <h3 className="text-7xl font-light tracking-tighter text-kern">{aspirationCount}</h3>
               <p className="text-[10px] text-gray-300 mt-4 uppercase tracking-widest italic">+ Pembaruan Waktu Nyata</p>
             </div>
             <div className="text-center md:border-x border-gray-100 px-10">
               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-8">Provinsi Dijangkau</span>
-              <h3 className="text-7xl font-light tracking-tighter counter text-kern" data-target="38">0</h3>
+              <h3 className="text-7xl font-light tracking-tighter text-kern">38</h3>
               <p className="text-[10px] text-gray-300 mt-4 uppercase tracking-widest italic">Cakupan Nasional</p>
             </div>
             <div className="text-center">
               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-8">Program Strategis</span>
-              <h3 className="text-7xl font-light tracking-tighter counter text-kern" data-target="12">0</h3>
+              <h3 className="text-7xl font-light tracking-tighter text-kern">12</h3>
               <p className="text-[10px] text-gray-300 mt-4 uppercase tracking-widest italic">Sasaran 2026</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* BAGIAN TIM */}
       <section id="team" className="py-40 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8 text-kern">
@@ -299,22 +274,26 @@ export default function Home() {
           </div>
           <div className="team-slider-container">
             <div className="team-track" ref={teamTrackRef}>
-              {Team.map((member, idx) => (
-                <div key={idx} className="team-card group">
-                  <img src={member.img} alt={member.name} />
+              {members?.map((member, idx) => (
+                <div key={member.id} className="team-card group">
+                  <img src={member.imageUrl} alt={member.fullName} />
                   <div className="team-arrow"><ArrowUpRight size={16} strokeWidth={2} /></div>
                   <div className="team-overlay">
-                    <h4 className="text-xl font-semibold">{member.name}</h4>
-                    <p className="text-[10px] uppercase tracking-widest opacity-70 mt-1">{member.role}</p>
+                    <h4 className="text-xl font-semibold">{member.fullName}</h4>
+                    <p className="text-[10px] uppercase tracking-widest opacity-70 mt-1">{member.position}</p>
+                    <p className="text-[8px] uppercase tracking-widest opacity-50 mt-1">{member.school}</p>
                   </div>
                 </div>
-              ))}
+              )) || (
+                <div className="py-20 text-center w-full text-gray-300 font-light italic">
+                  Memuat data kepemimpinan...
+                </div>
+              )}
             </div>
           </div>
         </div>
       </section>
 
-      {/* JEJAK LANGKAH (HORIZONTAL) */}
       <section id="gallery" className="py-20 bg-[#0a0a0a] border-t border-gray-900">
         <div id="gallery-horizontal">
           <div className="horizontal-sticky">
@@ -323,20 +302,20 @@ export default function Home() {
                 <h2 className="text-[10px] uppercase tracking-[0.5em] text-gray-600 mb-8">Dokumentasi</h2>
                 <h3 className="text-5xl font-medium tracking-tighter leading-none text-white text-kern">Jejak Langkah Kolektif.</h3>
               </div>
-              <div className="horizontal-item"><img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1200" className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" alt="Galeri 1" /></div>
-              <div className="horizontal-item"><img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=1200" className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" alt="Galeri 2" /></div>
-              <div className="horizontal-item"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1200" className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" alt="Galeri 3" /></div>
-              <div className="horizontal-item"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1200" className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" alt="Galeri 4" /></div>
-              <div className="horizontal-item"><img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=1200" className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" alt="Galeri 5" /></div>
+              {gallery?.map((img) => (
+                <div key={img.id} className="horizontal-item">
+                  <img src={img.imageUrl} className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700" alt={img.caption || 'Galeri'} />
+                </div>
+              )) || (
+                <div className="flex items-center text-gray-800 italic">Memuat dokumentasi...</div>
+              )}
             </div>
           </div>
         </div>
       </section>
 
-      {/* BAGIAN ASPIRASI */}
       <AspirasiSection />
 
-      {/* KAKI LAMAN (FOOTER) */}
       <footer className="bg-[#0a0a0a] text-white pt-40 pb-16 overflow-hidden">
         <div className="max-w-7xl mx-auto px-8">
           <div className="grid md:grid-cols-12 gap-16 mb-40">
