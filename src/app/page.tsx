@@ -242,7 +242,6 @@ export default function Home() {
           <a href="#gallery" onClick={closeMenu} className="menu-link text-kern">Jejak</a>
           <a href="#aspiration" onClick={closeMenu} className="menu-link text-kern">Aspirasi</a>
           <a href="mailto:sekretariat@dagm.org" onClick={closeMenu} className="menu-link text-kern">Hubungi</a>
-          <a href="/admin" onClick={closeMenu} className="menu-link text-gray-600 text-kern">Panel Admin</a>
         </div>
         <div className="mt-20 flex gap-10 text-white opacity-30 text-[10px] uppercase tracking-[0.5em]">
           <span>Instagram</span><span>LinkedIn</span><span>Twitter</span>
