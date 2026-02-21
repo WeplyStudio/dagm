@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState } from 'react';
@@ -6,8 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Megaphone, Send, CheckCircle2, Loader2, ShieldCheck } from "lucide-react";
+import { CheckCircle2, Loader2, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export function AspirasiSection() {
@@ -19,7 +17,6 @@ export function AspirasiSection() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate formal API submission
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
@@ -32,107 +29,92 @@ export function AspirasiSection() {
 
   if (submitted) {
     return (
-      <Card className="w-full max-w-2xl mx-auto border-emerald-100 shadow-glow animate-fade-up">
-        <CardContent className="pt-12 pb-12 text-center">
-          <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
-            <CheckCircle2 size={40} />
+      <section id="aspiration" className="py-40 bg-slate-950 text-white flex items-center justify-center">
+        <div className="max-w-2xl px-6 text-center animate-fade-up">
+          <div className="w-24 h-24 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-10 shadow-glow">
+            <CheckCircle2 size={48} />
           </div>
-          <h3 className="text-2xl font-bold mb-2">Registrasi Berhasil</h3>
-          <p className="text-muted-foreground mb-8">
-            Kontribusi pemikiran Anda telah tercatat secara resmi sebagai bagian dari database aspirasi strategis.
+          <h3 className="text-4xl md:text-5xl font-medium tracking-tighter mb-6">Registrasi Berhasil</h3>
+          <p className="text-slate-400 text-lg font-light leading-relaxed mb-12">
+            Kontribusi pemikiran Anda telah tercatat secara resmi sebagai bagian dari database aspirasi strategis nasional.
           </p>
           <Button 
-            variant="outline" 
             onClick={() => {
               setSubmitted(false);
               setAspiration('');
             }}
-            className="rounded-full"
+            className="rounded-full bg-white text-black hover:bg-slate-200 px-10 py-7 text-[10px] uppercase tracking-[0.4em] font-bold"
           >
             Ajukan Aspirasi Baru
           </Button>
-        </CardContent>
-      </Card>
+        </div>
+      </section>
     );
   }
 
   return (
-    <section id="aspirasi" className="py-24 bg-background">
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <span className="bg-emerald-50 text-emerald-600 border border-emerald-100 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
-            Sistem Informasi Aspirasi Digital
-          </span>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mt-6 font-headline">
-            Penyampaian Aspirasi Strategis
-          </h2>
-          <p className="text-slate-500 mt-3 max-w-2xl mx-auto">
-            Saluran komunikasi digital resmi untuk menghimpun isu strategis, naskah kebijakan, dan rekomendasi konstruktif demi kemajuan ekosistem pendidikan.
-          </p>
+    <section id="aspiration" className="py-40 bg-slate-950 text-white">
+      <div className="max-w-4xl mx-auto px-6">
+        <div className="mb-32 text-center">
+          <h2 className="text-[10px] uppercase tracking-[1.2em] text-slate-700 mb-10 font-bold">Ruang Partisipasi</h2>
+          <h3 className="text-5xl md:text-6xl font-light tracking-tighter leading-none text-kern">Sampaikan <br /> Aspirasi Anda.</h3>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          <div className="space-y-8">
-            <div className="flex gap-4 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm">
-              <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center shrink-0">
-                <ShieldCheck size={24} />
-              </div>
-              <div>
-                <h4 className="font-bold text-slate-900 mb-1">Legalitas & Akuntabilitas</h4>
-                <p className="text-sm text-slate-500">
-                  Setiap naskah aspirasi akan diproses secara administratif melalui mekanisme penelaahan internal dewan sebelum diajukan ke otoritas terkait.
-                </p>
-              </div>
+        <form onSubmit={handleSubmit} className="space-y-16">
+          <div className="grid md:grid-cols-2 gap-16">
+            <div className="border-b border-slate-800 py-6 focus-within:border-white transition-all duration-300">
+              <Label htmlFor="name" className="text-[10px] uppercase font-bold text-slate-500 block mb-4 tracking-widest">Nama Lengkap</Label>
+              <Input 
+                id="name" 
+                className="w-full bg-transparent border-none outline-none text-2xl font-light p-0 h-auto placeholder:text-slate-800 text-white" 
+                placeholder="Sesuai Identitas Resmi" 
+                required 
+              />
+            </div>
+            <div className="border-b border-slate-800 py-6 focus-within:border-white transition-all duration-300">
+              <Label htmlFor="school" className="text-[10px] uppercase font-bold text-slate-500 block mb-4 tracking-widest">Institusi / Afiliasi</Label>
+              <Input 
+                id="school" 
+                className="w-full bg-transparent border-none outline-none text-2xl font-light p-0 h-auto placeholder:text-slate-800 text-white" 
+                placeholder="Nama Universitas / Sekolah" 
+                required 
+              />
             </div>
           </div>
 
-          <Card className="shadow-card border-slate-100 overflow-hidden">
-            <CardHeader className="bg-slate-50/50">
-              <CardTitle className="font-headline">Formulir Pengajuan Resmi</CardTitle>
-              <CardDescription>Lengkapi instrumen data di bawah ini untuk mengirimkan dokumen aspirasi Anda kepada dewan.</CardDescription>
-            </CardHeader>
-            <CardContent className="pt-6">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">Nama Lengkap Sesuai Identitas</Label>
-                    <Input id="name" placeholder="Masukkan nama lengkap Anda" required />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="school">Institusi Pendidikan Asal</Label>
-                    <Input id="school" placeholder="Nama sekolah atau universitas" required />
-                  </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <Label htmlFor="subject">Subjek Isu Strategis</Label>
-                  <Input id="subject" placeholder="Misal: Evaluasi Kurikulum Berbasis Digital" required />
-                </div>
+          <div className="border-b border-slate-800 py-6 focus-within:border-white transition-all duration-300">
+            <Label htmlFor="subject" className="text-[10px] uppercase font-bold text-slate-500 block mb-4 tracking-widest">Isu Strategis</Label>
+            <Input 
+              id="subject" 
+              className="w-full bg-transparent border-none outline-none text-2xl font-light p-0 h-auto placeholder:text-slate-800 text-white" 
+              placeholder="Contoh: Evaluasi Infrastruktur Digital" 
+              required 
+            />
+          </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="aspiration">Narasi Aspirasi / Rekomendasi Kebijakan</Label>
-                  <Textarea 
-                    id="aspiration" 
-                    placeholder="Sampaikan naskah aspirasi, analisis permasalahan, atau usulan kebijakan Anda secara komprehensif..."
-                    className="min-h-[200px]"
-                    value={aspiration}
-                    onChange={(e) => setAspiration(e.target.value)}
-                    required
-                  />
-                </div>
+          <div className="border-b border-slate-800 py-6 focus-within:border-white transition-all duration-300">
+            <Label htmlFor="aspiration" className="text-[10px] uppercase font-bold text-slate-500 block mb-4 tracking-widest">Narasi Aspirasi</Label>
+            <Textarea 
+              id="aspiration" 
+              className="w-full bg-transparent border-none outline-none text-2xl font-light min-h-[160px] p-0 resize-none placeholder:text-slate-800 text-white" 
+              placeholder="Huraikan gagasan atau cadangan anda secara komprehensif..." 
+              value={aspiration}
+              onChange={(e) => setAspiration(e.target.value)}
+              required
+            />
+          </div>
 
-                <Button 
-                  type="submit" 
-                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold h-12 rounded-xl transition-all shadow-md"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? <Loader2 className="animate-spin mr-2" /> : <Send className="mr-2" size={18} />}
-                  Submit Dokumentasi Aspirasi
-                </Button>
-              </form>
-            </CardContent>
-          </Card>
-        </div>
+          <div className="flex justify-center pt-12">
+            <Button 
+              type="submit" 
+              disabled={isSubmitting}
+              className="bg-white text-black px-16 py-8 rounded-full text-[10px] uppercase tracking-[0.4em] font-bold hover:bg-slate-200 transition-all duration-500 h-auto shadow-xl"
+            >
+              {isSubmitting ? <Loader2 className="animate-spin mr-2" /> : <Send className="mr-2" size={16} />}
+              Kirim Dokumentasi Sekarang
+            </Button>
+          </div>
+        </form>
       </div>
     </section>
   );
