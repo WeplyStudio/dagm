@@ -52,11 +52,10 @@ export default function Home() {
       interval = setInterval(() => {
         setProgress((prev) => {
           if (prev >= 99) {
-            // Jika data sudah selesai dimuat, langsung ke 100
             if (!loadingAspirations && !loadingMembers && !loadingGallery) {
               return 100;
             }
-            return 99; // Tahan di 99 sampai data siap
+            return 99;
           }
           return prev + 1;
         });
@@ -216,7 +215,7 @@ export default function Home() {
 
   return (
     <div className="bg-white">
-      {/* Layar Pemuatan (Hanya Persentase) */}
+      {/* Layar Pemuatan (Persentase) */}
       <div 
         ref={loaderRef}
         className="fixed inset-0 z-[10000] bg-black flex items-center justify-center overflow-hidden"
@@ -244,7 +243,7 @@ export default function Home() {
           <a href="mailto:sekretariat@dagm.org" onClick={closeMenu} className="menu-link text-kern">Hubungi</a>
         </div>
         <div className="mt-20 flex gap-10 text-white opacity-30 text-[10px] uppercase tracking-[0.5em]">
-          <span>Instagram</span><span>LinkedIn</span><span>Twitter</span>
+          <a href="https://instagram.com/dewan.aspirasi.generasi.muda" target="_blank" rel="noopener noreferrer" className="hover:opacity-100 transition">Instagram</a>
         </div>
       </div>
 
@@ -423,8 +422,7 @@ export default function Home() {
             <div className="md:col-span-2">
               <h4 className="text-[10px] uppercase tracking-[0.5em] text-gray-500 mb-8 font-bold">Ikuti Kami</h4>
               <ul className="space-y-4 text-sm font-light text-gray-400">
-                <li><a href="#" className="hover:text-white transition">Instagram</a></li>
-                <li><a href="#" className="hover:text-white transition">LinkedIn</a></li>
+                <li><a href="https://instagram.com/dewan.aspirasi.generasi.muda" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Instagram</a></li>
               </ul>
             </div>
           </div>
