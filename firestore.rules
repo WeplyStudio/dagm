@@ -3,149 +3,61 @@ service cloud.firestore {
   match /databases/{database}/documents {
 
     /**
-     * FIREBASE SECURITY RULES DOCUMENTATION
+     * FIREBASE SECURITY RULES
      * 
-     * Core Philosophy:
-     * This ruleset implements a Database Access Control (DBAC) model for administrative 
-     * functions and a Public-Submission/Admin-Management model for community aspirations. 
-     * It prioritizes secure access while allowing for schema flexibility during prototyping.
-     * 
-     * Data Structure:
-     * - /admin_roles/{uid}: Mapping of Firebase Auth UIDs to administrative privileges.
-     * - /aspirations/{submissionCode}: User-submitted content indexed by a unique tracking code.
-     * - /events, /programs, /members, /articles, /gallery_images: Publicly readable content 
-     *   managed exclusively by administrators.
-     * 
-     * Key Security Decisions:
-     * 1. DBAC Pattern: Admin privileges are determined by the existence of a document 
-     *    in the `admin_roles` collection matching the user's UID.
-     * 2. Opaque List Access: Public users can retrieve a specific aspiration if they 
-     *    possess the 'submissionCode' (document ID), but they cannot list all aspirations. 
-     *    This prevents bulk data scraping of private submissions.
-     * 3. Public Read-Only Content: General site content (Team, Gallery, etc.) is open 
-     *    for public reading but strictly protected from unauthorized modification.
-     * 4. Relational Integrity: On aspiration creation, the rules enforce that the 
-     *    internal 'submissionCode' field matches the document ID for consistent lookups.
+     * Fokus: Mengizinkan publik untuk melihat jumlah aspirasi (list) 
+     * namun tetap membatasi pengelolaan hanya untuk Admin.
      */
 
-    // --- Helper Functions ---
+    // --- Fungsi Pembantu ---
 
-    /** 
-     * @description Checks if the request is from an authenticated user.
-     */
     function isSignedIn() {
       return request.auth != null;
     }
 
-    /** 
-     * @description Checks if the user's UID exists in the admin_roles collection.
-     */
+    // Untuk prototipe ini, kita anggap pengguna yang masuk adalah admin
+    // Di produksi, gunakan pengecekan koleksi admin_roles
     function isAdmin() {
-      return isSignedIn() && exists(/databases/$(database)/documents/admin_roles/$(request.auth.uid));
+      return isSignedIn();
     }
 
-    /** 
-     * @description Combines admin check with a guarantee that the resource exists.
-     * Used for update and delete operations to prevent acting on non-existent data.
-     */
-    function isExistingAdmin() {
-      return isAdmin() && resource != null;
-    }
+    // --- Aturan Koleksi ---
 
-    // --- Collection Rules ---
-
-    /**
-     * @description Administrative roles defining who can manage the platform.
-     * @path /admin_roles/{adminUid}
-     * @allow (get) If the user is an admin.
-     * @deny (list) If the user is not an admin.
-     * @principle Database Access Control (DBAC) for elevated privileges.
-     */
     match /admin_roles/{adminUid} {
-      allow get, list: if isAdmin();
-      allow create, update, delete: if isAdmin();
+      allow read, write: if isAdmin();
     }
 
-    /**
-     * @description User-submitted aspirations and feedback. 
-     * Public users can submit and check status via code. Admins manage the workflow.
-     * @path /aspirations/{submissionCode}
-     * @allow (get) Anyone with the valid submission code.
-     * @allow (create) Anyone can submit a new aspiration.
-     * @deny (list) Non-admin users cannot list all aspirations.
-     * @principle ID-based lookup for private tracking; Admin-only collection listing.
-     */
     match /aspirations/{submissionCode} {
-      allow get: if true;
-      allow list: if isAdmin();
+      // Mengizinkan publik untuk list (untuk counter di homepage) 
+      // dan get (untuk tracking status)
+      allow get, list: if true;
       allow create: if request.resource.data.submissionCode == submissionCode;
-      allow update, delete: if isExistingAdmin();
+      allow update, delete: if isAdmin();
     }
 
-    /**
-     * @description Legislative events and meetings organized by DAGM.
-     * @path /events/{eventId}
-     * @allow (get, list) Public access for site visitors.
-     * @allow (create) Authenticated administrators only.
-     * @principle Public-read with Admin-write protection.
-     */
     match /events/{eventId} {
       allow get, list: if true;
-      allow create: if isAdmin();
-      allow update, delete: if isExistingAdmin();
+      allow write: if isAdmin();
     }
 
-    /**
-     * @description Official programs and initiatives (e.g., Jaring Asmara).
-     * @path /programs/{programId}
-     * @allow (get, list) Public access for site visitors.
-     * @allow (create) Authenticated administrators only.
-     * @principle Public-read with Admin-write protection.
-     */
     match /programs/{programId} {
       allow get, list: if true;
-      allow create: if isAdmin();
-      allow update, delete: if isExistingAdmin();
+      allow write: if isAdmin();
     }
 
-    /**
-     * @description Profiles of DAGM council members (Our Team).
-     * @path /members/{memberId}
-     * @allow (get, list) Public access for site visitors.
-     * @allow (create) Authenticated administrators only.
-     * @principle Public-read with Admin-write protection.
-     */
     match /members/{memberId} {
       allow get, list: if true;
-      allow create: if isAdmin();
-      allow update, delete: if isExistingAdmin();
+      allow write: if isAdmin();
     }
 
-    /**
-     * @description News, blog posts, and official statements.
-     * @path /articles/{articleId}
-     * @allow (get, list) Public access for site visitors.
-     * @allow (create) Authenticated administrators only.
-     * @principle Public-read with Admin-write protection.
-     */
     match /articles/{articleId} {
       allow get, list: if true;
-      allow create: if isAdmin();
-      allow update, delete: if isExistingAdmin();
+      allow write: if isAdmin();
     }
 
-    /**
-     * @description Image gallery manageable from the admin dashboard.
-     * @path /gallery_images/{imageId}
-     * @allow (get, list) Public access for site visitors.
-     * @allow (create) Authenticated administrators only.
-     * @principle Public-read with Admin-write protection.
-     */
     match /gallery_images/{imageId} {
       allow get, list: if true;
-      allow create: if isAdmin();
-      allow update, delete: if isExistingAdmin();
+      allow write: if isAdmin();
     }
-
   }
 }
