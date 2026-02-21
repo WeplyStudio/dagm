@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState } from 'react';
@@ -23,7 +22,7 @@ export function AspirasiSection() {
       setSubmitted(true);
       toast({
         title: "Dokumen Aspirasi Diterima",
-        description: "Aspirasi Anda telah diregistrasi dalam sistem database dewan untuk proses penelaahan lebih lanjut."
+        description: "Aspirasi Anda telah terdaftar dalam sistem dewan untuk proses penelaahan lebih lanjut."
       });
     }, 1500);
   };
@@ -68,28 +67,28 @@ export function AspirasiSection() {
               <Input 
                 id="name" 
                 className="w-full bg-transparent border-none outline-none text-2xl font-light p-0 h-auto placeholder:text-gray-800 text-white focus-visible:ring-0" 
-                placeholder="Identiti Rasmi" 
+                placeholder="Identitas Resmi" 
                 required 
               />
             </div>
             <div className="border-b border-gray-800 py-6 focus-within:border-white transition-all duration-300">
-              <Label htmlFor="email" className="text-[10px] uppercase font-bold text-gray-500 block mb-4 tracking-widest">Alamat E-mel</Label>
+              <Label htmlFor="email" className="text-[10px] uppercase font-bold text-gray-500 block mb-4 tracking-widest">Alamat Email</Label>
               <Input 
                 id="email" 
                 type="email"
                 className="w-full bg-transparent border-none outline-none text-2xl font-light p-0 h-auto placeholder:text-gray-800 text-white focus-visible:ring-0" 
-                placeholder="email@institusi.com" 
+                placeholder="nama@institusi.com" 
                 required 
               />
             </div>
           </div>
 
           <div className="border-b border-gray-800 py-6 focus-within:border-white transition-all duration-300">
-            <Label htmlFor="aspiration" className="text-[10px] uppercase font-bold text-gray-500 block mb-4 tracking-widest">Mesej Aspirasi</Label>
+            <Label htmlFor="aspiration" className="text-[10px] uppercase font-bold text-gray-500 block mb-4 tracking-widest">Pesan Aspirasi</Label>
             <Textarea 
               id="aspiration" 
               className="w-full bg-transparent border-none outline-none text-2xl font-light min-h-[160px] p-0 resize-none placeholder:text-gray-800 text-white focus-visible:ring-0" 
-              placeholder="Huraikan gagasan atau cadangan anda untuk bangsa..." 
+              placeholder="Uraikan gagasan atau rekomendasi Anda untuk bangsa..." 
               value={aspiration}
               onChange={(e) => setAspiration(e.target.value)}
               required
@@ -103,7 +102,7 @@ export function AspirasiSection() {
               className="bg-white text-black px-8 py-4 rounded-full text-[10px] uppercase tracking-[0.4em] font-bold hover:invert transition-all duration-500 h-auto shadow-xl"
             >
               {isSubmitting ? <Loader2 className="animate-spin mr-2" /> : <Send className="mr-2" size={16} />}
-              Hantar Aspirasi Sekarang
+              Kirim Aspirasi Sekarang
             </Button>
           </div>
         </form>

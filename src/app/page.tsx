@@ -144,17 +144,17 @@ export default function Home() {
   };
 
   const Pillars = [
-    { id: "01", title: "Aspirasi & Advokasi", desc: "Garda terdepan dalam menjaring, mengolah, dan mengawal aspirasi pemuda kepada pemangku kebijakan nasional." },
-    { id: "02", title: "Media Kreatif", desc: "Pusat narasi visual dan pengelola konten digital strategis untuk menjangkau konstituen secara luas." },
-    { id: "03", title: "Humas & Kemitraan", desc: "Membangun kemitraan strategis dengan institusi pemerintah, NGO, dan pemangku kepentingan internasional." },
-    { id: "04", title: "Pengembangan Organisasi", desc: "Menjamin kelestarian lembaga melalui pengelolaan SDM profesional, kaderisasi, dan sistem internal." },
-    { id: "05", title: "Pendidikan Literasi", desc: "Meningkatkan kapasitas intelektual pemuda menghadapi era disrupsi informasi melalui program literasi." },
-    { id: "06", title: "Kewirausahaan", desc: "Mendorong kemandirian ekonomi pemuda melalui aksi pemberdayaan ekonomi berbasis inovasi." },
-    { id: "HQ", title: "Sekretariat Jenderal", desc: "Pusat kontrol administrasi, surat-menyurat, dan koordinasi lintas departemen untuk sinkronisasi program." }
+    { id: "01", title: "Media Kreatif", desc: "Pusat narasi visual dan pengelola konten digital strategis untuk menjangkau audiens secara luas." },
+    { id: "02", title: "Hubungan Masyarakat", desc: "Membangun kemitraan strategis dengan pemangku kepentingan nasional maupun internasional." },
+    { id: "03", title: "Wirausaha & Masyarakat", desc: "Mendorong kemandirian ekonomi pemuda dan aksi pemberdayaan sosial berbasis komunitas." },
+    { id: "04", title: "Pendidikan Literasi", desc: "Meningkatkan kapasitas intelektual pemuda menghadapi era disrupsi informasi nasional." },
+    { id: "05", title: "Aspirasi & Advokasi", desc: "Garda terdepan dalam menyerap suara pemuda Indonesia untuk diolah menjadi rekomendasi kebijakan." },
+    { id: "06", title: "Pengembangan Organisasi", desc: "Menjamin kelestarian organisasi melalui pengelolaan SDM profesional dan sistem internal." },
+    { id: "HQ", title: "Sekretaris Jenderal", desc: "Pusat kendali administrasi dan koordinasi lintas departemen untuk sinkronisasi program kerja." }
   ];
 
   const Team = [
-    { name: "Alexandros V.", role: "Pendiri Dewan", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800" },
+    { name: "Alexandros V.", role: "Pendiri", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800" },
     { name: "David Gilmore", role: "Ketua Umum", img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800" },
     { name: "Gerard White", role: "Wakil Ketua", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800" },
     { name: "Elena R.", role: "Sekretaris I", img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800" },
@@ -210,12 +210,12 @@ export default function Home() {
       <section className="min-h-screen flex flex-col justify-center px-8 relative overflow-hidden">
         <div className="max-w-6xl mx-auto w-full pt-48 pb-20">
           <h2 className="text-[11px] uppercase tracking-[0.6em] text-gray-600 mb-10 hero-reveal text-kern font-semibold">Est. 2026 / Institusi Aspirasi</h2>
-          <h1 className="text-5xl md:text-[64px] font-medium tracking-tighter leading-[0.85] mb-16 hero-reveal">
-            Dewan Aspirasi <br /> Generasi Muda.
+          <h1 className="text-6xl md:text-[4rem] font-medium tracking-tighter leading-[0.85] mb-16 hero-reveal">
+            Masa Depan <br /> Bangsa Berawal <br /> dari <span className="italic text-gray-200">Gagasan.</span>
           </h1>
           <div className="flex flex-col md:flex-row md:items-start gap-12 hero-reveal">
             <p className="text-xl font-light text-gray-400 max-w-sm leading-relaxed text-kern">
-              Masa depan bangsa berawal dari gagasan. Kami hadir sebagai katalisator kebijakan strategis bagi pemuda Indonesia.
+              Dewan Aspirasi Generasi Muda hadir sebagai katalisator kebijakan strategis bagi pemuda Indonesia.
             </p>
             <div className="flex flex-col gap-4">
               <a href="#aspiration" className="text-[10px] uppercase tracking-widest font-bold border-b border-black pb-2 w-fit hover:text-gray-500 transition">Sampaikan Suara Anda</a>
@@ -250,9 +250,9 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-20 border-y border-gray-100 py-32">
             <div className="text-center">
-              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-8">Aspirasi Terurus</span>
+              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-8">Aspirasi Terkelola</span>
               <h3 className="text-7xl font-light tracking-tighter counter text-kern" data-target="1500">0</h3>
-              <p className="text-[10px] text-gray-300 mt-4 uppercase tracking-widest italic">+ Kemas Kini Masa Nyata</p>
+              <p className="text-[10px] text-gray-300 mt-4 uppercase tracking-widest italic">+ Pembaruan Waktu Nyata</p>
             </div>
             <div className="text-center md:border-x border-gray-100 px-10">
               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-8">Provinsi Dijangkau</span>
@@ -260,7 +260,7 @@ export default function Home() {
               <p className="text-[10px] text-gray-300 mt-4 uppercase tracking-widest italic">Liputan Nasional</p>
             </div>
             <div className="text-center">
-              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-8">Program Strategik</span>
+              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-8">Program Strategis</span>
               <h3 className="text-7xl font-light tracking-tighter counter text-kern" data-target="12">0</h3>
               <p className="text-[10px] text-gray-300 mt-4 uppercase tracking-widest italic">Sasaran 2026</p>
             </div>
@@ -273,8 +273,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8 text-kern">
             <div className="max-w-xl">
-              <h2 className="text-[10px] uppercase tracking-[0.8em] text-gray-400 mb-6">Kepimpinan</h2>
-              <h3 className="text-5xl font-medium tracking-tighter">Dewan Strategik.</h3>
+              <h2 className="text-[10px] uppercase tracking-[0.8em] text-gray-400 mb-6">Kepemimpinan</h2>
+              <h3 className="text-5xl font-medium tracking-tighter">Dewan Strategis.</h3>
             </div>
             <div className="flex space-x-4 mb-2">
               <button onClick={() => moveTeam(-1)} className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300">
@@ -340,13 +340,13 @@ export default function Home() {
             <div className="md:col-span-2 md:col-start-8">
               <h4 className="text-[10px] uppercase tracking-[0.5em] text-gray-500 mb-8 font-bold">Eksplorasi</h4>
               <ul className="space-y-4 text-sm font-light text-gray-400">
-                <li><a href="#" className="hover:text-white transition">Falsafah</a></li>
-                <li><a href="#departments" className="hover:text-white transition">Pilar Strategik</a></li>
+                <li><a href="#" className="hover:text-white transition">Filosofi</a></li>
+                <li><a href="#departments" className="hover:text-white transition">Pilar Strategis</a></li>
                 <li><a href="#team" className="hover:text-white transition">Struktur</a></li>
               </ul>
             </div>
             <div className="md:col-span-2">
-              <h4 className="text-[10px] uppercase tracking-[0.5em] text-gray-500 mb-8 font-bold">Sambungan</h4>
+              <h4 className="text-[10px] uppercase tracking-[0.5em] text-gray-500 mb-8 font-bold">Ikuti Kami</h4>
               <ul className="space-y-4 text-sm font-light text-gray-400">
                 <li><a href="#" className="hover:text-white transition">Instagram</a></li>
                 <li><a href="#" className="hover:text-white transition">LinkedIn</a></li>
@@ -359,7 +359,7 @@ export default function Home() {
           </div>
 
           <div className="pt-10 border-t border-gray-900 flex flex-col md:flex-row justify-between items-center gap-6 text-[9px] uppercase tracking-[0.4em] text-gray-600 font-bold">
-            <p>&copy; 2026 Dewan Aspirasi Generasi Muda. Hak Cipta Terpelihara.</p>
+            <p>&copy; 2026 Dewan Aspirasi Generasi Muda. Hak Cipta Dilindungi Undang-Undang.</p>
             <div className="flex gap-8">
               <a href="#" className="hover:text-white transition">Kebijakan Privasi</a>
               <a href="#" className="hover:text-white transition">Ketentuan Layanan</a>
