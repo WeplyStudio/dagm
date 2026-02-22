@@ -29,6 +29,7 @@ export default function Home() {
   const teamTrackRef = useRef<HTMLDivElement>(null);
   const horizontalTrackRef = useRef<HTMLDivElement>(null);
   const loaderRef = useRef<HTMLDivElement>(null);
+  const statsSectionRef = useRef<HTMLDivElement>(null);
   const [teamIndex, setTeamIndex] = useState(0);
 
   const db = useFirestore();
@@ -109,6 +110,7 @@ export default function Home() {
       });
     }
 
+    // Animasi Stacked Cards
     const stackItems = gsap.utils.toArray(".stack-item");
     stackItems.forEach((card: any, i, arr) => {
       if (i !== arr.length - 1) {
@@ -126,10 +128,30 @@ export default function Home() {
       }
     });
 
+    // Animasi Angka Statistik
+    const stats = gsap.utils.toArray(".stat-number");
+    stats.forEach((stat: any) => {
+      const target = parseInt(stat.getAttribute('data-target') || '0');
+      gsap.fromTo(stat, 
+        { innerText: 0 },
+        { 
+          innerText: target, 
+          duration: 2, 
+          ease: "power4.out",
+          snap: { innerText: 1 },
+          scrollTrigger: {
+            trigger: stat,
+            start: "top 90%",
+            toggleActions: "play none none none"
+          }
+        }
+      );
+    });
+
     return () => {
       ScrollTrigger.getAll().forEach(t => t.kill());
     };
-  }, [isAppLoading]);
+  }, [isAppLoading, aspirationCount]); // Re-run trigger jika aspirationCount berubah
 
   // Efek Galeri Horizontal
   useEffect(() => {
@@ -311,22 +333,22 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-40 bg-white">
+      <section className="py-40 bg-white" ref={statsSectionRef}>
         <div className="max-w-7xl mx-auto px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-20 border-y border-gray-100 py-32">
             <div className="text-center">
               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-8">Aspirasi Terkelola</span>
-              <h3 className="text-7xl font-light tracking-tighter text-kern">{aspirationCount}</h3>
+              <h3 className="text-7xl font-light tracking-tighter text-kern stat-number" data-target={aspirationCount}>0</h3>
               <p className="text-[10px] text-gray-300 mt-4 uppercase tracking-widest italic font-bold">+ Pembaruan Waktu Nyata</p>
             </div>
             <div className="text-center md:border-x border-gray-100 px-10">
               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-8">Provinsi Dijangkau</span>
-              <h3 className="text-7xl font-light tracking-tighter text-kern">38</h3>
+              <h3 className="text-7xl font-light tracking-tighter text-kern stat-number" data-target="38">0</h3>
               <p className="text-[10px] text-gray-300 mt-4 uppercase tracking-widest italic font-bold">Cakupan Nasional</p>
             </div>
             <div className="text-center">
               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block mb-8">Program Strategis</span>
-              <h3 className="text-7xl font-light tracking-tighter text-kern">12</h3>
+              <h3 className="text-7xl font-light tracking-tighter text-kern stat-number" data-target="12">0</h3>
               <p className="text-[10px] text-gray-300 mt-4 uppercase tracking-widest italic font-bold">Sasaran 2026</p>
             </div>
           </div>
