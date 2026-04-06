@@ -127,11 +127,11 @@ export function AspirasiSection() {
           <form onSubmit={handleSubmit} className="space-y-16">
             <div className="grid md:grid-cols-2 gap-20">
               <div className="border-b border-gray-100 py-6 focus-within:border-black transition-all duration-300">
-                <Label htmlFor="name" className="text-[10px] uppercase font-bold text-gray-400 block mb-4 tracking-widest">Nama Lengkap</Label>
+                <Label htmlFor="name" className="text-[10px] uppercase font-bold text-gray-400 block mb-4 tracking-widest">Nama</Label>
                 <Input 
                   id="name" 
                   className="w-full bg-transparent border-none outline-none text-2xl font-light p-0 h-auto placeholder:text-gray-200 text-black focus-visible:ring-0" 
-                  placeholder="Nama Sesuai KTP" 
+                  placeholder="Nama" 
                   value={formData.name}
                   onChange={(e) => setFormData({...formData, name: e.target.value})}
                   required 
